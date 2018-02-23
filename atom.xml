@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>静夜|blog</title>
+  
+  <subtitle>er567&#39;s blog</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="oohyo.github.io/"/>
+  <updated>2018-02-09T12:15:52.841Z</updated>
+  <id>oohyo.github.io/</id>
+  
+  <author>
+    <name>er567</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>不要随便监听改变浏览记录！</title>
+    <link href="oohyo.github.io/2018/01/31/%E5%88%AB%E6%94%B9%E5%8F%98%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/"/>
+    <id>oohyo.github.io/2018/01/31/别改变浏览器访问历史记录/</id>
+    <published>2018-01-30T19:00:00.000Z</published>
+    <updated>2018-02-09T12:15:52.841Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在项目中遇到的坑，已填平=-=<br>以后还是尽量别手动强跳页面打乱浏览器访问记录，尽量用原生的返回，性能体验比较好(返回后有缓存除外。</p><h3 id="监听浏览器返回事件"><a href="#监听浏览器返回事件" class="headerlink" title="监听浏览器返回事件"></a>监听浏览器返回事件</h3> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);<span class="comment">//兼容</span></div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"popstate"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="comment">//do something  </span></div><div class="line">&#125;,<span class="literal">false</span>);</div></pre></td></tr></table></figure><p><strong>注意：</strong>ios8会有bug，页面加载的时候会直接执行监听的内容。</p><p><strong>原因：</strong>浏览器版本，导致进页面就默认触发了popstate，导致了代码段执行，可以用下面的代码解决。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">params</span>:&#123;<span class="attr">isRun</span>: <span class="literal">false</span>&#125;,</div><div class="line">    <span class="attr">backTo</span>:&#123;</div><div class="line">        <span class="comment">//图一代码段</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">initBack</span>:&#123;</div><div class="line">       <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line">       self.param.isRun = <span class="literal">false</span>;  </div><div class="line">       setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; self.param.isRun = <span class="literal">true</span>; &#125;, <span class="number">1000</span>); <span class="comment">//延迟1秒 防止微信返回立即执行popstate事件  </span></div><div class="line">       self.backTo();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><h3 id="浏览器缓存问题"><a href="#浏览器缓存问题" class="headerlink" title="浏览器缓存问题"></a>浏览器缓存问题</h3><p>1.如是跳转页面 可以加时间戳<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//调用</span></div><div class="line">timestamp(getReferrer())</div></pre></td></tr></table></figure></p><a id="more"></a> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getReferrer</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> referrer = <span class="string">''</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        referrer = <span class="built_in">window</span>.top.document.referrer;</div><div class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="built_in">window</span>.parent) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                referrer = <span class="built_in">window</span>.parent.document.referrer;</div><div class="line">            &#125; <span class="keyword">catch</span> (e2) &#123;</div><div class="line">                referrer = <span class="string">''</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (referrer === <span class="string">''</span>) &#123;</div><div class="line">        referrer = <span class="built_in">document</span>.referrer;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> referrer;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">timestamp</span>(<span class="params">url</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> getTimestamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</div><div class="line">    <span class="keyword">if</span> (url.indexOf(<span class="string">"&amp;timestamp"</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">        url = url.split(<span class="string">"&amp;timestamp"</span>)[<span class="number">0</span>] + <span class="string">"&amp;timestamp="</span> + getTimestamp;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span>(url.indexOf(<span class="string">"?"</span>) &gt; <span class="number">-1</span>)&#123;</div><div class="line">            url = url + <span class="string">"&amp;timestamp="</span> + getTimestamp</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            url = url + <span class="string">"?timestamp="</span> + getTimestamp</div><div class="line">        &#125; </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> url;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>2.可以在前页设置cookie或者session，设置标识判断<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cookie.set(<span class="string">'isDelateBack'</span>, <span class="string">'1'</span>);<span class="comment">//前页 设置cookie</span></div><div class="line"></div><div class="line"><span class="keyword">if</span>(cookie.get(<span class="string">'isDelateBack'</span>)==<span class="string">'1'</span>)&#123;<span class="comment">//后页 监听cookie,刷新页面(重置状态或清空cookie)</span></div><div class="line">    cookie.set(<span class="string">'isDelateBack'</span>,<span class="string">'0'</span>)</div><div class="line">    <span class="built_in">window</span>.location.reload();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>3.缓存机制是浏览器自带的， 不会发起请求和执行js代码。pageshow方法是无效的</p><h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><ul><li><p>微信小程序自带返回在ios和安卓的区别。</p></li><li><p>新坑，ios11以上，position：fixed弹窗上弹出键盘输入，会导致定位的弹窗错位以及光标错位；换成absolute就好</p></li></ul><blockquote><p>更新于2018.02.09 20:10 (小年夜)</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在项目中遇到的坑，已填平=-=&lt;br&gt;以后还是尽量别手动强跳页面打乱浏览器访问记录，尽量用原生的返回，性能体验比较好(返回后有缓存除外。&lt;/p&gt;
+&lt;h3 id=&quot;监听浏览器返回事件&quot;&gt;&lt;a href=&quot;#监听浏览器返回事件&quot; class=&quot;headerlink&quot; title=&quot;监听浏览器返回事件&quot;&gt;&lt;/a&gt;监听浏览器返回事件&lt;/h3&gt; &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.history.pushState(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//兼容&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.addEventListener(&lt;span class=&quot;string&quot;&gt;&quot;popstate&quot;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//do something  &lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;,&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;ios8会有bug，页面加载的时候会直接执行监听的内容。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原因：&lt;/strong&gt;浏览器版本，导致进页面就默认触发了popstate，导致了代码段执行，可以用下面的代码解决。&lt;br&gt; &lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; obj = &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;params&lt;/span&gt;:&amp;#123;&lt;span class=&quot;attr&quot;&gt;isRun&lt;/span&gt;: &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&amp;#125;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;backTo&lt;/span&gt;:&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;//图一代码段&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;initBack&lt;/span&gt;:&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; self = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       self.param.isRun = &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       setTimeout(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123; self.param.isRun = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; &amp;#125;, &lt;span class=&quot;number&quot;&gt;1000&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//延迟1秒 防止微信返回立即执行popstate事件  &lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       self.backTo();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;浏览器缓存问题&quot;&gt;&lt;a href=&quot;#浏览器缓存问题&quot; class=&quot;headerlink&quot; title=&quot;浏览器缓存问题&quot;&gt;&lt;/a&gt;浏览器缓存问题&lt;/h3&gt;&lt;p&gt;1.如是跳转页面 可以加时间戳&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//调用&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;timestamp(getReferrer())&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="小程序" scheme="oohyo.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+      <category term="h5" scheme="oohyo.github.io/tags/h5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小程序嵌h5</title>
+    <link href="oohyo.github.io/2018/01/27/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%86%85%E5%B5%8Ch5/"/>
+    <id>oohyo.github.io/2018/01/27/小程序内嵌h5/</id>
+    <published>2018-01-26T20:02:58.000Z</published>
+    <updated>2018-01-30T08:06:27.611Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="小程序嵌h5"><a href="#小程序嵌h5" class="headerlink" title="小程序嵌h5"></a>小程序嵌h5</h3><pre><code>&lt;web-view src=&quot;https://www.xxx.com?parmes=data&amp;token=token&quot;&gt;&lt;/web-view&gt;</code></pre><p>在内嵌的h5页面中通过<br>if(window.__wxjs_environment === ‘miniprogram’){}<br>判断当前环境是在h5还是小程序//需要引用JSSDK 1.3.1 以上版本<br>然后在进行相关的逻辑操作，最后带参数返回小程序</p><h3 id="通过url传参"><a href="#通过url传参" class="headerlink" title="通过url传参"></a>通过url传参</h3><pre><code>wx.miniProgram.navigateTo({url:&apos;https:xxx.com?parmes=1&amp;key=2&apos;})onLoad: function (options) {    console.log(options);//{parmes=1,key=2}}</code></pre><ul><li><p>当前小程序不支持h5支付流程，只好调相关支付小程序或其他方法</p></li><li><p>目前往里跳转的页面路径最多只能十层</p></li><li><p>待续</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;小程序嵌h5&quot;&gt;&lt;a href=&quot;#小程序嵌h5&quot; class=&quot;headerlink&quot; title=&quot;小程序嵌h5&quot;&gt;&lt;/a&gt;小程序嵌h5&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;web-view src=&amp;quot;https://www.xxx.com?par
+      
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="小程序" scheme="oohyo.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+      <category term="h5" scheme="oohyo.github.io/tags/h5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>移动端动画</title>
+    <link href="oohyo.github.io/2018/01/21/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%8A%A8%E7%94%BB%E5%8D%A1%E9%A1%BF/"/>
+    <id>oohyo.github.io/2018/01/21/移动端动画卡顿/</id>
+    <published>2018-01-20T23:50:00.000Z</published>
+    <updated>2018-01-22T03:23:36.653Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="一丶jq-zepto-animate-方法"><a href="#一丶jq-zepto-animate-方法" class="headerlink" title="一丶jq/zepto animate()方法"></a>一丶jq/zepto animate()方法</h3><ul><li>可以细化操作，回调方法，但是在移动端（安卓）卡顿</li></ul><h3 id="二丶css3-animation"><a href="#二丶css3-animation" class="headerlink" title="二丶css3 animation"></a>二丶css3 animation</h3><ul><li>可以用@keyframes细化过渡效果，没有回调操作，只能监控animation/transition是否已完成。</li></ul><h3 id="三丶transform-过渡top-left-导致重绘，手机性能不好时依然卡顿"><a href="#三丶transform-过渡top-left-导致重绘，手机性能不好时依然卡顿" class="headerlink" title="三丶transform 过渡top/left 导致重绘，手机性能不好时依然卡顿"></a>三丶transform 过渡top/left 导致重绘，手机性能不好时依然卡顿</h3><ul><li><p>使用绝对位置定位页面上的动画元素，将其脱离文档流，可以有效的防止重排。</p></li><li><p>使用transform:translateY/X来移动元素  scale()缩放元素</p></li><li><p>加上 -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); 开启GPU硬件加速</p></li><li><p>[参考链接]<a href="http://blog.csdn.net/majun0007/article/details/70049070" target="_blank" rel="external">http://blog.csdn.net/majun0007/article/details/70049070</a></p></li></ul><h3 id="四丶遇到的坑"><a href="#四丶遇到的坑" class="headerlink" title="四丶遇到的坑"></a>四丶遇到的坑</h3><ul><li><p>元素display:none的时候是拿不到transform的值（其他属性没试），解决办法：用visibility: hidden;</p></li><li><p>过渡动画的时候，先让元素display:block 马上执行css3动画，结果浏览器直接忽略过渡动画，渲染最后的结果。</p><p>解决办法：使用延时器，延迟一点css3动画的执行。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;一丶jq-zepto-animate-方法&quot;&gt;&lt;a href=&quot;#一丶jq-zepto-animate-方法&quot; class=&quot;headerlink&quot; title=&quot;一丶jq/zepto animate()方法&quot;&gt;&lt;/a&gt;一丶jq/zepto animate()方法
+      
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="兼容性" scheme="oohyo.github.io/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
+    
+      <category term="css3" scheme="oohyo.github.io/tags/css3/"/>
+    
+      <category term="动画" scheme="oohyo.github.io/tags/%E5%8A%A8%E7%94%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2017年度总结</title>
+    <link href="oohyo.github.io/2018/01/01/2017%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    <id>oohyo.github.io/2018/01/01/2017年度总结/</id>
+    <published>2017-12-31T23:59:00.000Z</published>
+    <updated>2018-01-22T02:06:18.786Z</updated>
+    
+    <content type="html"><![CDATA[<p>不知不觉2017就过完了，大概回顾一下吧：</p><p>年前<strong>一月</strong>份还在学校里面消磨着最后的学校时光，虽然周围人是越来越少了但好歹还是有一些的，大体活动也就是吃饭、开黑、跑步、跑得快了。那会年底工作并不是很好找，好歹运气还行，面试了一个算是拿到offer了。</p><p><strong>二月</strong>份中便入职了，先是当了MT(你好，我叫MT…)这期间认识了很多小伙伴，妈耶还第一次穿了西装皮鞋，想想也算是洗脑一波。</p><p>然后<strong>三月份</strong>就进入到了轨道，开始了正式的工作以及学习。刚开始对于模块化开发、requirejs、单例模式、MVC/MVVM框架都挺陌生，但后来接触熟悉之后发现也就这样，不过倒是发现前端的分支是真的多，以后还有很长的路要走…</p><p>到了<strong>六七月</strong>份忙着毕业设计和答辩，原以为还得认真准备的还特地请了半个月的假，结果也就是走了个过场，不过总算是顺利毕业。毕业之后便和佛在西门租了个两室一厅过起了潇洒的日子，刚开始不觉得，现在想想还是有点想念那时候。翻了下相册，七月还和同事一起去了趟娄底湄江旅游，山水非常nice；<br><img src="https://t1.aixinxi.net/o_1c4dp9kvqgekpe12vcu3j1dn3a.jpg-w.jpg" alt="湄江"><br><a id="more"></a><br>七月在同事的氛围和自己的想法下，和佛商量一起去领了皮皮(3个月三花小母猫)。<br><img src="https://t1.aixinxi.net/o_1c4dp7ln21pkc1nn71m30123q15vua.png-w.jpg" alt="皮皮3个月"><img src="https://t1.aixinxi.net/o_1c4dpa1co1d79hmou6aifqv35a.png-w.jpg" alt="皮皮8个月"><br>再后来<strong>十月</strong>佛走了，去了深圳，而我也就开始了群居生活。其中一些枝末细节已经记不得了，只知道他们真的和皮皮生活在一起的时候才觉得它是个累赘，开始我并不觉得，到现在我也依然不觉得，虽然它确实很调皮，但只觉得有点费钱罢了，这并不怪它，怪只怪我挣得确实不多。</p><p>再到现在<strong>十二月</strong>过完，回头想想一幕幕放佛还是昨天，一路过来也没什么计划，这一年看了很多博客才知道许多人年初都会有大体计划然后再细化到每个季度每个月，这些东西就算是朋友也未必会和你说，但他们写在博客里大多都只是为了给自己一个记录吧，就像我也是一样。</p><p>接着再分类总结一下，规划规划明年吧。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不知不觉2017就过完了，大概回顾一下吧：&lt;/p&gt;
+&lt;p&gt;年前&lt;strong&gt;一月&lt;/strong&gt;份还在学校里面消磨着最后的学校时光，虽然周围人是越来越少了但好歹还是有一些的，大体活动也就是吃饭、开黑、跑步、跑得快了。那会年底工作并不是很好找，好歹运气还行，面试了一个算是拿到offer了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;二月&lt;/strong&gt;份中便入职了，先是当了MT(你好，我叫MT…)这期间认识了很多小伙伴，妈耶还第一次穿了西装皮鞋，想想也算是洗脑一波。&lt;/p&gt;
+&lt;p&gt;然后&lt;strong&gt;三月份&lt;/strong&gt;就进入到了轨道，开始了正式的工作以及学习。刚开始对于模块化开发、requirejs、单例模式、MVC/MVVM框架都挺陌生，但后来接触熟悉之后发现也就这样，不过倒是发现前端的分支是真的多，以后还有很长的路要走…&lt;/p&gt;
+&lt;p&gt;到了&lt;strong&gt;六七月&lt;/strong&gt;份忙着毕业设计和答辩，原以为还得认真准备的还特地请了半个月的假，结果也就是走了个过场，不过总算是顺利毕业。毕业之后便和佛在西门租了个两室一厅过起了潇洒的日子，刚开始不觉得，现在想想还是有点想念那时候。翻了下相册，七月还和同事一起去了趟娄底湄江旅游，山水非常nice；&lt;br&gt;&lt;img src=&quot;https://t1.aixinxi.net/o_1c4dp9kvqgekpe12vcu3j1dn3a.jpg-w.jpg&quot; alt=&quot;湄江&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="oohyo.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="年度总结" scheme="oohyo.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>window nginx配置https相关问题</title>
+    <link href="oohyo.github.io/2017/12/12/nginx-https/"/>
+    <id>oohyo.github.io/2017/12/12/nginx-https/</id>
+    <published>2017-12-11T18:00:01.000Z</published>
+    <updated>2017-12-11T10:15:19.127Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>[emerg] BIO_new_file(“/usr/local/nginx/conf/cert/214291778530222.pem”) failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen(‘/usr/local/nginx/conf/cert/214291778530222.pem’,’r’) error:2006D080:BIO routines:BIO_new_file:no such file) failed. </li></ol><p>=&gt;原因未知，将证书和key的路径改成相对路径就可以了</p><ol><li>[emerg] shared zone “SSL” has no equal addresses: 02CC0000 vs 02CB0000</li></ol><p>=&gt;错误原因：ssl_protocols SSLv2 SSLv3 TLSv1 应该是协议配置的问题<br>=&gt;解决办法：ssl_protocols  SSLv3 TLSv1 TLSv1.1 TLSv1.2;</p><ol><li>如果是include vhost里的配置，则vhost里的conf配置也要加上listen 443;</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;[emerg] BIO_new_file(“/usr/local/nginx/conf/cert/214291778530222.pem”) failed (SSL: error:02001002:system library:fopen:No such fil
+      
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="前端" scheme="oohyo.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="nginx" scheme="oohyo.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决 Windows 下 VSCode 运行 Python 程序的中文乱码问题</title>
+    <link href="oohyo.github.io/2017/11/29/VScode%E7%BB%88%E7%AB%AF%E4%B9%B1%E7%A0%81/"/>
+    <id>oohyo.github.io/2017/11/29/VScode终端乱码/</id>
+    <published>2017-11-28T18:30:00.000Z</published>
+    <updated>2017-12-11T10:15:27.465Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>Windows 下的 cmd 和 powershell 默认是 GBK 编码显示输出内容， 这导致使用 UTF-8 的 Python 程序中的中文内容（包括注释、文档、和字符串字面量）会以不正确的解码方式输出成乱码内容。</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>Windows 内置了一个叫 “chcp” 的命令，它可以修改要显示的字符集编码的编号。UTF-8 的编号是 65001，所以启动 cmd 或者 powershell 以后可以手动输入：chcp 65001来改变编码。 </p><p>启动 powershell 的时候带上修改编码的参数: “chcp.com 65001” 即可做到自动设置编码。设置如下:<br><a id="more"></a><br>选择：文件 - 首选项 - 用户设置，粘贴下面的配置键值到 json 中保存：</p><pre><code>&quot;terminal.integrated.shellArgs.windows&quot;: [&quot;-NoExit&quot;, &quot;/c&quot;, &quot;chcp 65001&quot;]</code></pre><p>但是注意：仅靠修改代码页编号在 cmd 下仍然无法正常显示中文，需要进一步修改字体（有待考证）。<br>ps:(当我用默认的cmd,没换成poweshell时候,)<br>所以没有管 cmd 了，因为在 powershell 下是正常的。</p><p><strong>修改 Terminal</strong></p><p>选择：文件 - 首选项 - 用户设置，粘贴下面的配置键值到 json 中保存：</p><pre><code>&quot;terminal.integrated.shell.windows&quot;: &quot;C:\\WINDOWS\\sysnative\\WindowsPowerShell\\v1.0\\powershell.exe&quot;</code></pre><h3 id="附参考链接："><a href="#附参考链接：" class="headerlink" title="附参考链接："></a>附参考链接：</h3><p><a href="https://blog.bluerain.io/p/Windows-Terminal-Coding.html" target="_blank" rel="external">蓝雨博客</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;原因&quot;&gt;&lt;a href=&quot;#原因&quot; class=&quot;headerlink&quot; title=&quot;原因&quot;&gt;&lt;/a&gt;原因&lt;/h3&gt;&lt;p&gt;Windows 下的 cmd 和 powershell 默认是 GBK 编码显示输出内容， 这导致使用 UTF-8 的 Python 程序中的中文内容（包括注释、文档、和字符串字面量）会以不正确的解码方式输出成乱码内容。&lt;/p&gt;
+&lt;h3 id=&quot;解决办法&quot;&gt;&lt;a href=&quot;#解决办法&quot; class=&quot;headerlink&quot; title=&quot;解决办法&quot;&gt;&lt;/a&gt;解决办法&lt;/h3&gt;&lt;p&gt;Windows 内置了一个叫 “chcp” 的命令，它可以修改要显示的字符集编码的编号。UTF-8 的编号是 65001，所以启动 cmd 或者 powershell 以后可以手动输入：chcp 65001来改变编码。 &lt;/p&gt;
+&lt;p&gt;启动 powershell 的时候带上修改编码的参数: “chcp.com 65001” 即可做到自动设置编码。设置如下:&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="python" scheme="oohyo.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习笔记(一)</title>
+    <link href="oohyo.github.io/2017/11/25/pyhton%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/"/>
+    <id>oohyo.github.io/2017/11/25/pyhton学习笔记(一)/</id>
+    <published>2017-11-24T16:42:00.000Z</published>
+    <updated>2017-12-11T10:15:23.388Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="一、环境搭建"><a href="#一、环境搭建" class="headerlink" title="一、环境搭建"></a>一、环境搭建</h3><h4 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h4><p><a href="https://www.python.org/" target="_blank" rel="external">https://www.python.org/</a> 下载python3.x安装包</p><p>安装好，并添加至系统环境变量。</p><h4 id="虚拟环境virtualenv"><a href="#虚拟环境virtualenv" class="headerlink" title="虚拟环境virtualenv"></a>虚拟环境virtualenv</h4><ol><li>pip install virtualenv </li><li>cd 到一个你想创建的目录路径</li><li>virtualenv venv 环境名称</li></ol><h3 id="二、基本语法"><a href="#二、基本语法" class="headerlink" title="二、基本语法"></a>二、基本语法</h3><p>python对缩进要求非常严格，</p><p>如果格式有误则会抛出类似‘IndentationError: unexpected indent’的错误。</p><p>空格与tab不能混用，否则会报错。所以还是用两个空格吧&gt;&lt;</p><a id="more"></a><h4 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h4><ol><li>正常的+，-，*，/，取余%和js都是一样的；</li><li>除法（/）永远返回一个浮点数   15/3=5.0</li><li>如果想取整可以使用（//）运算符  17//3=5</li><li>计算幂乘方使用（**） 5**2=25</li><li>交互模式中，最近一个表达式的值会赋给变量（_），这是一个系统内置变量</li></ol><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><ol><li>和js一样，单引号‘’，双引号“”都可以表示字符串，\ 用来转义。</li><li>print() 函数生成可读性更好的输出, 它会省去引号并且打印出转义后的特殊字符</li><li>如果字符串中的\字符被当作特殊字符，可以使用原始字符串，在第一个引号前加r</li></ol><p>>>> print(‘C:\some\name’)  # here \n means newline!<br>C:\some<br>ame<br>>>> print(r’C:\some\name’)  # note the r before the quote<br>C:\some\name</p><ol><li>三个引号表示多行字符串文本，行尾的换行符会被自动包含在字符串中，可以在行尾加\来避免换行。</li><li>字符串拼接用+，重复字符串用*；</li></ol><p>>>> 3 * ‘un’ + ‘ium’<br>‘unununium’</p><ol><li>python相邻的字符串会自动连接，但字符串和变量不会自动连。</li></ol><p>>>> text = (‘Put several strings within parentheses ‘<br>‘to have them joined together.’)<br>>>> text<br>‘Put several strings within parentheses to have them joined together.’</p><ol><li>字符串自带索引，左边从0开始，负数则从最后一个字符开始。</li><li>字符串自带切片,’Python’[0:2] = ‘Py’;</li></ol><p>s[:i] + s[i:] 永远等于 s ; ‘Python’[:2]  + ‘Python’[2:]  = ‘Python’</p><ol><li>len(str) 内置函数返回字符串长度</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;一、环境搭建&quot;&gt;&lt;a href=&quot;#一、环境搭建&quot; class=&quot;headerlink&quot; title=&quot;一、环境搭建&quot;&gt;&lt;/a&gt;一、环境搭建&lt;/h3&gt;&lt;h4 id=&quot;基础环境&quot;&gt;&lt;a href=&quot;#基础环境&quot; class=&quot;headerlink&quot; title=&quot;基础环境&quot;&gt;&lt;/a&gt;基础环境&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;https://www.python.org/&quot;&gt;https://www.python.org/&lt;/a&gt; 下载python3.x安装包&lt;/p&gt;
+&lt;p&gt;安装好，并添加至系统环境变量。&lt;/p&gt;
+&lt;h4 id=&quot;虚拟环境virtualenv&quot;&gt;&lt;a href=&quot;#虚拟环境virtualenv&quot; class=&quot;headerlink&quot; title=&quot;虚拟环境virtualenv&quot;&gt;&lt;/a&gt;虚拟环境virtualenv&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;pip install virtualenv &lt;/li&gt;
+&lt;li&gt;cd 到一个你想创建的目录路径&lt;/li&gt;
+&lt;li&gt;virtualenv venv 环境名称&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;二、基本语法&quot;&gt;&lt;a href=&quot;#二、基本语法&quot; class=&quot;headerlink&quot; title=&quot;二、基本语法&quot;&gt;&lt;/a&gt;二、基本语法&lt;/h3&gt;&lt;p&gt;python对缩进要求非常严格，&lt;/p&gt;
+&lt;p&gt;如果格式有误则会抛出类似‘IndentationError: unexpected indent’的错误。&lt;/p&gt;
+&lt;p&gt;空格与tab不能混用，否则会报错。所以还是用两个空格吧&amp;gt;&amp;lt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="python" scheme="oohyo.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ibeacons管理后台</title>
+    <link href="oohyo.github.io/2017/11/11/ibeacons%E5%90%8E%E5%8F%B0/"/>
+    <id>oohyo.github.io/2017/11/11/ibeacons后台/</id>
+    <published>2017-11-11T11:11:11.000Z</published>
+    <updated>2018-01-22T01:57:27.916Z</updated>
+    
+    <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;最近写了一个ibeacons管理后台,用到了很多新的东西，也踩了很多坑，就写下来记录回顾一下吧。</p><p><strong>效果图:</strong> </p><p><img src="https://t1.aixinxi.net/o_1bvmkgrdh14ls1uuqkmr1n08udja.png-w.jpg" alt="pic"> </p><a id="more"></a><p><img src="https://t1.aixinxi.net/o_1bvmkgedh17apcrp22m5og1ejba.png-w.jpg" alt="pic"> </p><p><img src="https://t1.aixinxi.net/o_1bvmka53i1to3g4gonbnbmh1aa.png-w.jpg" alt="pic"></p><h3 id="1、Techniques-used"><a href="#1、Techniques-used" class="headerlink" title="1、Techniques used"></a>1、Techniques used</h3><ul><li><a href="http://www.layui.com/" target="_blank" rel="external">layui</a> (phper推荐的,mmp)</li><li><a href="http://lab.jakiestfu.com/contextjs/" target="_blank" rel="external">context.js</a> (自定义右键菜单)</li><li><a href="https://www.hcharts.cn/" target="_blank" rel="external">highcharts</a>,<a href="http://echarts.baidu.com/" target="_blank" rel="external">echarts</a>  (可视化图表)</li><li>等等还有一些其他东西</li></ul><h3 id="2、Problem"><a href="#2、Problem" class="headerlink" title="2、Problem"></a>2、Problem</h3><ol><li>layui自称是一个模块化框架，首先引用它就和我们用的RequireJS模块加载器冲突了。</li></ol><p>解决办法：<br>在app.js里需要配置路径，然后shim导出，然后在文件中还需要配置layui的指向<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">layui.config(&#123;</div><div class="line">    <span class="attr">dir</span>: <span class="string">'//s1.bbgstatic.com/beacon-manager/js/plug/layui/'</span>,</div><div class="line">    <span class="attr">debug</span>: <span class="literal">false</span> <span class="comment">//</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p><ol><li><p>layui里一些东西无法灵活的配置，满足你的需求，这个没办法，不好用就不用呗</p></li><li><p>柱状图x轴条数过多，倾斜，默认超出会自适应的滚动条的</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">xAxis: &#123;</div><div class="line">    <span class="attr">min</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">max</span> :<span class="number">10</span>,</div><div class="line">    <span class="attr">type</span>: <span class="string">'category'</span>,</div><div class="line">    <span class="attr">labels</span>: &#123;</div><div class="line">        <span class="attr">rotation</span>: <span class="number">-45</span>,</div><div class="line">        <span class="attr">style</span>: &#123;</div><div class="line">            <span class="attr">fontSize</span>: <span class="string">'13px'</span>,</div><div class="line">            <span class="attr">fontFamily</span>: <span class="string">'Verdana, sans-serif'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>一些正则和逻辑判断，continue break return</p></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> urlData.conf)&#123;</div><div class="line">    <span class="keyword">var</span> _weight = urlData.conf[i].urlList[<span class="number">0</span>].weights;</div><div class="line">    <span class="keyword">var</span> _url = urlData.conf[i].urlList[<span class="number">0</span>].url;</div><div class="line">    <span class="keyword">if</span>(_weight==<span class="string">''</span>&amp;&amp;_url==<span class="string">''</span>)&#123;<span class="comment">//为空就跳过，验证下一行</span></div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">if</span>(_weight&lt;<span class="number">0</span>||_weight&gt;<span class="number">100</span>||!(<span class="regexp">/^\d+$/</span>.test(_weight)))&#123;                                </div><div class="line">            weightBoolean = <span class="literal">false</span>;<span class="keyword">break</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            weightBoolean = <span class="literal">true</span>;</div><div class="line">            <span class="keyword">if</span>(!<span class="regexp">/https?:\/&#123;2&#125;[^\s]*/</span>.test(_url))&#123;</div><div class="line">                urlBoolean = <span class="literal">false</span>;<span class="keyword">break</span>;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                urlBoolean = <span class="literal">true</span>;<span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><pre><code class="javascript"><span class="keyword">if</span>(!weightBoolean){    layer.msg(<span class="string">'权重请输入1-100的正整数！'</span>, { <span class="attr">icon</span>: <span class="number">5</span>})    <span class="keyword">return</span>;}<span class="keyword">if</span>(!urlBoolean){    layer.msg(<span class="string">'url格式输入有误，请检查后重新输入！'</span>, { <span class="attr">icon</span>: <span class="number">5</span>})    <span class="keyword">return</span>;}</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&#160; &#160; &#160; &#160;技术选型很重要，以后不要选layui这种啦。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;最近写了一个ibeacons管理后台,用到了很多新的东西，也踩了很多坑，就写下来记录回顾一下吧。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;效果图:&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://t1.aixinxi.net/o_1bvmkgrdh14ls1uuqkmr1n08udja.png-w.jpg&quot; alt=&quot;pic&quot;&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工作笔记" scheme="oohyo.github.io/categories/%E5%B7%A5%E4%BD%9C%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="layui" scheme="oohyo.github.io/tags/layui/"/>
+    
+      <category term="后台" scheme="oohyo.github.io/tags/%E5%90%8E%E5%8F%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>绝地求生攻略</title>
+    <link href="oohyo.github.io/2017/09/21/chiji/"/>
+    <id>oohyo.github.io/2017/09/21/chiji/</id>
+    <published>2017-09-20T18:00:00.000Z</published>
+    <updated>2017-12-11T10:15:05.703Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="资源-amp-载具"><a href="#资源-amp-载具" class="headerlink" title="资源&amp;载具"></a>资源&amp;载具</h3><p><img src="http://om1a60efb.bkt.clouddn.com/image/chiji/ziyuan.png" alt="资源"></p><h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><ul><li><p>跳伞未开伞，视角往下按住W加速垂直下落，可以比其他人提前到达。</p></li><li><p>跳伞未开伞，视角向前，保持125km/h速度，按住w，可以尽量飞得远。</p></li><li><p>松开W按等号键自动奔跑，按住ALt键自由观看，可以在自动奔跑时观察周围。</p></li><li><p>V切换第一/第三人称，第一人称更适合瞄准，第三人称适合观察。</p></li><li><p>持枪单击右键使用第一人称瞄准（使用瞄准镜的话只有单击右键才能看到）按住右键虚拟准星第三人称瞄准。</p></li><li><p>滚轮可以切换武器。</p></li><li><p>Tab键可以捡周围物品，右键点击周围物品快速拾取，在东西杂乱的地方好用。</p></li><li><p>右键背包里的配件可以自动装在武器栏配件里。</p></li><li><p>Q，E可以微微探头。</p></li><li><p>丢物品时按住ctrl可以选择数量。</p></li><li><p><strong>密位</strong>Pg，up，Pg，down可以在有倍数瞄准镜的情况下调整校正。</p></li></ul><a id="more"></a><ul><li><p>拿到枪要换子弹..此时不能奔跑。</p></li><li><p>T是附近/队伍语音。</p></li><li><p>开镜/机瞄时按<strong>shift屏息</strong>，稳定准星，无倍数镜时增加微量放大倍数。必须在静止不动时使用（神迹，用全息红点也能打很准很远）也可以用做望远镜。</p></li><li><p>步行时<strong>ctrl静步</strong>,游泳时ctrl下降空格上浮，游泳也可以用等号自动游。</p></li><li><p>驾驶车辆，快艇时按shift提速，会微微增加油耗。</p></li><li><p>载具中，ctrl+1/2/3/4在车里切换座位，1为驾驶2为副驾驶，行驶中亦可使用，主要用于队友司机被击倒之后恢复对车辆控制。</p></li><li><p>投掷类右键瞄准拉环，左键丢出，请不要按住右键不放手。</p></li><li><p>1、7条旁边有队友时候请格外小心。</p></li><li><p>B切换枪的单发和连射模式，突击步枪蹲人的时候切换成连发比较占便宜，但是后坐力很大。</p></li></ul><h3 id="枪支-amp-amp-配件"><a href="#枪支-amp-amp-配件" class="headerlink" title="枪支&amp;&amp;配件"></a>枪支&amp;&amp;配件</h3><p><strong>狙击枪：</strong></p><p>　　AWM：伤害和射程之王，三级头也是一枪倒。</p><p>　　M24：不输AWM的一把狙击，二级头及以下一枪。</p><p>　　Kar98(karabiner，98，Kruz)：二战手动步枪，每一发.射击后要拉栓，一级及无.头一枪击杀，2级头一发99。</p><p>　　SKS：连狙，打头的击杀能力与Kar98差不多，身体要略逊一筹，10发弹匣，对枪法有自信的人近战可以当AK用。</p><p>　　除AWM用.300马格南，其他都是7.26。</p><p>　　AWM，与M24只能在补给箱获得。</p><p>　　狙击枪：你一个新手还能拿到？拿到能用就行啦。</p><p><strong>突击步枪：</strong></p><p>　　AKM口径大，伤害最高。</p><p>　　M16A4，射速最快。</p><p>　　M416，配件项目最多。</p><p>　　SCAR没有最好的地方，各项数据平均。</p><p><strong>新手玩家推荐：</strong></p><p>　　优先级</p><p>　　手枪P1911</p><p>　　霰弹枪S12K</p><p>　　冲锋枪UMP9</p><p>　　突击步枪：有什么拿什么兄弟！</p><p><strong>手枪：</strong><br>　　R1895：与AK一样口径的手枪，威力直追AK，缺点是怕3级防具与换弹速度慢。枪法自信的人可以初期清理附近的人使用，初期没有高级护甲2-3枪可以杀人。</p><p>　　P1911：很平均，新手可用，.45子弹。</p><p>　　P92：伤害最低射速最快，如果能中三枪，枪法好的人可用，不过初期杀人要三枪打底。</p><p><strong>霰弹枪：</strong></p><p>　　S686：两发一个弹匣，有少量的中距离能力，大概在一个房子的距离之内。</p><p>　　S1897：亮点在于五发弹匣，伤害很足，距离和稳定性差，打纯优势战斗（对方实力不足/单发手枪/S686）的时候可以用，冲房子的时候推荐S12K。</p><p>　　S12K：五发弹匣，连喷，有中距离能力，近战之王，最多两枪一个，推荐清屋子，巷战侧翼包抄使用。</p><p><strong>冲锋枪：</strong></p><p>　　Uzi：乌兹，总体数据不如UMP9，射速稍快，而且较为稀有，不推荐，不过经常看到Uzi的枪托。</p><p>　　UMP9：中规中矩，近战打头拼命伤害还是很足的，2级头三枪撂倒。</p><p>　　汤普森：.45手枪子弹，射速全游戏最高，100弹匣，有效范围直追突击步枪，适合近中距离作战，只能在补给里获得。</p><p><strong>握把</strong>　　<br>    垂直握把减少枪口的上下后坐力，直角握把能减少上下的后坐力与左右飘的后坐力，但是没有垂直效果明显，不知道为什么游戏数据装配垂直握把会没有增强属性，战术握把，M416专用，增加稳定性。</p><p><strong>枪尾</strong></p><p>　　子弹袋，分为Kar98用和霰弹枪用，作用和QuickDraw，相同，减少换弹时间和取枪速度，托腮板，增加稳定性，应该是只有狙击有这个。</p><p>　　瞄准镜我就不细说了，15x只有补给有，8x4x和无倍数都能在各处找到。红点和全息我推荐红点，全息的圈圈阻挡视野。</p><p><strong>枪口：</strong></p><p>　　消焰器、消音器、补偿器、扼流圈</p><p>　　消焰器顾名思义，消除枪口火焰，让你更难被发现，同时开高配时候机瞄会有枪口火焰阻挡视野，可以增加击杀几率，讲道理，低配真的没用。</p><p>　　消音器，效果非常好，然而找。到合适的真的很难，这游戏由于做了超音速子弹音效，本身就比较难靠枪声判定方位，加了消音器几乎是隐身击杀</p><p>　　扼流圈，只有霰弹枪能用，集中射击范围，相当于勉强增加了射程，有就带上。</p><p>　　补偿器，降低后坐力，连发时效果中等。</p><p>　　消音&gt;补偿&gt;消焰</p><p><strong>弹夹</strong></p><p>　　QuickDraw，单看属性，加的是射速，但实际上，是增加换弹速度，和，取枪速度。</p><p>　　快速弹夹，提高换弹速度。</p><p>　　扩容弹夹，能给百分之三十的容量，扩充，其实很有用，连续作战能力好。</p><p>　　双弹夹，是兼容，两项的，好东西，优先级，一定是，双弹夹&gt;，扩容，快速</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;资源-amp-载具&quot;&gt;&lt;a href=&quot;#资源-amp-载具&quot; class=&quot;headerlink&quot; title=&quot;资源&amp;amp;载具&quot;&gt;&lt;/a&gt;资源&amp;amp;载具&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://om1a60efb.bkt.clouddn.com/image/chiji/ziyuan.png&quot; alt=&quot;资源&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;基础操作&quot;&gt;&lt;a href=&quot;#基础操作&quot; class=&quot;headerlink&quot; title=&quot;基础操作&quot;&gt;&lt;/a&gt;基础操作&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;跳伞未开伞，视角往下按住W加速垂直下落，可以比其他人提前到达。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;跳伞未开伞，视角向前，保持125km/h速度，按住w，可以尽量飞得远。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;松开W按等号键自动奔跑，按住ALt键自由观看，可以在自动奔跑时观察周围。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;V切换第一/第三人称，第一人称更适合瞄准，第三人称适合观察。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;持枪单击右键使用第一人称瞄准（使用瞄准镜的话只有单击右键才能看到）按住右键虚拟准星第三人称瞄准。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;滚轮可以切换武器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Tab键可以捡周围物品，右键点击周围物品快速拾取，在东西杂乱的地方好用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;右键背包里的配件可以自动装在武器栏配件里。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Q，E可以微微探头。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;丢物品时按住ctrl可以选择数量。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;密位&lt;/strong&gt;Pg，up，Pg，down可以在有倍数瞄准镜的情况下调整校正。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="游戏" scheme="oohyo.github.io/categories/%E6%B8%B8%E6%88%8F/"/>
+    
+    
+      <category term="随笔" scheme="oohyo.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css4新特性</title>
+    <link href="oohyo.github.io/2017/08/23/css4/"/>
+    <id>oohyo.github.io/2017/08/23/css4/</id>
+    <published>2017-08-23T13:50:00.000Z</published>
+    <updated>2017-12-11T10:15:08.816Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><a href="http://css4-selectors.com/selector/css4/negation-pseudo-class/" target="_blank" rel="external">:not</a> </li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:not(s1, s2, ...) &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>在css3中仅能匹配一个选择器,css4中可以匹配多个;</p><p>:not([data-xxx=”xx”],[data-xxx=”xxx”]);</p><p>可以用:not()来提高优先级 e.g .negation:not(p){ color:blue; }  .negation { color: black; }</p><p>仅支持safari</p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/matches-any-pseudo-class/" target="_blank" rel="external">:matches</a> </li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">E:matches(s1, s2) &#123;&#125;</div><div class="line">E:-webkit-any(s1, s2, ...) &#123;&#125;</div><div class="line">E:-moz-any(s1, s2, ...) &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>意义与:not()相反,匹配对应选择器,简化重复的规则</p><p>:matches(span, div) :matches(span, div) {}</p><p>支持大部分主流浏览器,不支持ie和Edge(win10内置浏览器)</p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/relational-pseudo-class/" target="_blank" rel="external">:has</a> </li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:has(rs1, rs2, ...)</div></pre></td></tr></table></figure><blockquote><p>包含伪类选择器,匹配选择器</p><p>暂时没有浏览器支持</p></blockquote><a id="more"></a><ol><li><a href="http://css4-selectors.com/selector/css4/attribute-case-sensitivity/" target="_blank" rel="external">E:[foo=”bar” i]</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:[foo=<span class="string">"bar"</span> i]&#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>属性选择器,忽略大小写</p><p>不支持ie,Edge和Chrome for Mobile</p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/dir-pseudo-class/" target="_blank" rel="external">:dir</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:dir(ltr/rtl)&#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>根据文本方向匹配,从左到右或者从右到左 </p><p>[dir=…]无法匹配到没显示声明 dir 的元素,:dir()可以</p><p>仅支持Firefox</p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/lang-pseudo-class/" target="_blank" rel="external">:lang</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:lang(*-CA) &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>在css2中就被添加,css4中新增了通配符</p><p>暂时木有浏览器支持 </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/hyperlink-pseudo-class/" target="_blank" rel="external">:any-link</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">E:any-link &#123;&#125;</div><div class="line">E:-webkit-any-link &#123;&#125;</div><div class="line">E:-moz-any-link &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>超链接伪类选择器,只要a有href就能匹配,在以前只能a[href=value]</p><p>支持大部分主流浏览器,不支持ie和Edge </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/scope-pseudo-class/" target="_blank" rel="external">:scope</a> </li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:scope() &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>样式范围伪类选择器,style scope的父元素以内的范围</p><p>持大部分主流浏览器,不支持ie和Edge </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/time-dimensional-pseudo-class/" target="_blank" rel="external">:current / :past / :future</a> </li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">E:current(s1, s2, ...) &#123;&#125;</div><div class="line">E:past(s1, s2, ...) &#123;&#125;</div><div class="line">E:future(s1, s2, ...) &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>匹配当前,过去和未来的伪类选择器,类似歌词/字幕</p><p><track> 给媒体元素规定外部文本轨道，当媒体播放时，这些文件可见<br>暂时没有浏览器支持 </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/drop-pseudo-class/" target="_blank" rel="external">:drop</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:drop(active || valid || invalid) &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>匹配被拖动元素覆盖的元素(状态) </p><p>暂时没有浏览器支持 </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/indeterminate-value-pseudo-class/" target="_blank" rel="external">:indeterminate</a> </li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:indeterminate &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>匹配不确定的元素,如Checkbox &amp; radio,默认只有两种状态checked unchecked,<br>需要用js赋第三种状态document.querySelector(‘#id’).indeterminate = true;<br>支持所有主流浏览器</p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/default-option-pseudo-class/" target="_blank" rel="external">:default</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:<span class="keyword">default</span> &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>匹配默认元素的伪类选择器,一组相近的ui元素中默认的,form表单的第一个按钮</p><p>不支持ie和Edge浏览器 </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/range-pseudo-class/" target="_blank" rel="external">Validity</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">E:valid &#123;&#125;</div><div class="line">E:invalid &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>匹配input&amp;form元素有效还是无效,e.g input type=’mail’ &gt; input type=’tel’ </p><p>兼容所有主流浏览器</p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/validity-pseudo-class/" target="_blank" rel="external">Range</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">E:<span class="keyword">in</span>-range &#123;&#125;</div><div class="line">E:out-<span class="keyword">of</span>-range &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>匹配input的值是否在规定范围区间</p><p>兼容主流浏览器,除了ie</p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/optionality-pseudo-class/" target="_blank" rel="external">Optionality</a>可选性</li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">E:required &#123;&#125;</div><div class="line">E:optional &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>可选性伪类选择器,匹配表单内input是否必选</p><p>兼容所有主流浏览器 </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/range-pseudo-class/" target="_blank" rel="external">:user-error</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:user-error &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>匹配:invalid, :out-of-range, or empty :required,当用户与元素有了交互才能生效 </p><p>不兼容所有浏览器. </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/mutability-pseudo-class/" target="_blank" rel="external">:read-only / :read-write</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">E:read-only &#123;&#125;</div><div class="line">E:read-write &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>前者匹配不能编辑的元素比如p,span,h1,h2..;后者匹配可编辑元素 contenteditable=”true”的元素.input textarea等</p><p>不支持ie和Safari for mobile,Opera for mobile </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/placeholder-pseudo-class/" target="_blank" rel="external">Placeholder-Shown</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">E:placeholder-shown &#123; <span class="comment">/* Style properties */</span> &#125;</div><div class="line">E::-webkit-input-placeholder &#123; <span class="comment">/* Chrome, Safari, Opera */</span> &#125;</div><div class="line">E::-moz-placeholder &#123; <span class="comment">/* Firefox */</span> &#125;</div><div class="line">E:-ms-input-placeholder &#123; <span class="comment">/* IE */</span> &#125;</div></pre></td></tr></table></figure><blockquote><p>匹配有占位字符的输入框,给占位字符设置样式</p><p>兼容所有主流浏览器 </p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/blank-pseudo-class/" target="_blank" rel="external">:blank</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">E:blank &#123;&#125; </div><div class="line">E:-moz-only-whitespace &#123; <span class="comment">/* Firefox */</span> &#125;</div></pre></td></tr></table></figure><blockquote><p>与css3中的:empty类似,区别是:empty中不能有元素,:blank中可以有;匹配空格,tab和段落换行</p><p>仅支持火狐,需兼容写法</p></blockquote><ol><li><a href="http://css4-selectors.com/selector/css4/grid-structural-pseudo-class/" target="_blank" rel="external">Grid-Structural</a></li></ol><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">E:column(selector) &#123;&#125;</div><div class="line">E:nth-column(an + b) &#123;&#125;</div><div class="line">E:nth-last-column(an + b) &#123;&#125;</div></pre></td></tr></table></figure><blockquote><p>匹配对应列的所有元素,:nth-last-column是从后往前数</p><p>暂不支持所有浏览器</p></blockquote><h4 id="附参考资料："><a href="#附参考资料：" class="headerlink" title="附参考资料："></a>附参考资料：</h4><p><a href="http://css4.rocks/" target="_blank" rel="external">文档</a></p><p><a href="http://css4-selectors.com/selectors/" target="_blank" rel="external">Demo</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://css4-selectors.com/selector/css4/negation-pseudo-class/&quot;&gt;:not&lt;/a&gt; &lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;E:not(s1, s2, ...) &amp;#123;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在css3中仅能匹配一个选择器,css4中可以匹配多个;&lt;/p&gt;
+&lt;p&gt;:not([data-xxx=”xx”],[data-xxx=”xxx”]);&lt;/p&gt;
+&lt;p&gt;可以用:not()来提高优先级 e.g .negation:not(p){ color:blue; }  .negation { color: black; }&lt;/p&gt;
+&lt;p&gt;仅支持safari&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://css4-selectors.com/selector/css4/matches-any-pseudo-class/&quot;&gt;:matches&lt;/a&gt; &lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;E:matches(s1, s2) &amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;E:-webkit-any(s1, s2, ...) &amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;E:-moz-any(s1, s2, ...) &amp;#123;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;意义与:not()相反,匹配对应选择器,简化重复的规则&lt;/p&gt;
+&lt;p&gt;:matches(span, div) :matches(span, div) {}&lt;/p&gt;
+&lt;p&gt;支持大部分主流浏览器,不支持ie和Edge(win10内置浏览器)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://css4-selectors.com/selector/css4/relational-pseudo-class/&quot;&gt;:has&lt;/a&gt; &lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;E:has(rs1, rs2, ...)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;包含伪类选择器,匹配选择器&lt;/p&gt;
+&lt;p&gt;暂时没有浏览器支持&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="oohyo.github.io/tags/css/"/>
+    
+      <category term="布局" scheme="oohyo.github.io/tags/%E5%B8%83%E5%B1%80/"/>
+    
+      <category term="兼容性" scheme="oohyo.github.io/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo--d部署失败</title>
+    <link href="oohyo.github.io/2017/08/11/hexo-d%20%E9%83%A8%E7%BD%B2%E5%A4%B1%E8%B4%A5/"/>
+    <id>oohyo.github.io/2017/08/11/hexo-d 部署失败/</id>
+    <published>2017-08-10T16:08:00.000Z</published>
+    <updated>2017-12-11T10:15:12.604Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="fatal-in-unpopulated-submodule-‘-deploy-git’"><a href="#fatal-in-unpopulated-submodule-‘-deploy-git’" class="headerlink" title="fatal: in unpopulated submodule ‘.deploy_git’"></a>fatal: in unpopulated submodule ‘.deploy_git’</h2><blockquote><p>遇到这个错误首先可以先尝试重新安装hexo-deployer-git依赖</p><p>npm install hexo-deployer-git –save</p><p>如果还是无法部署，可以尝试将.deploy_git文件夹删除，重新hexo g hexo d</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;fatal-in-unpopulated-submodule-‘-deploy-git’&quot;&gt;&lt;a href=&quot;#fatal-in-unpopulated-submodule-‘-deploy-git’&quot; class=&quot;headerlink&quot; title=&quot;fata
+      
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="hexo" scheme="oohyo.github.io/tags/hexo/"/>
+    
+      <category term="deployer" scheme="oohyo.github.io/tags/deployer/"/>
+    
+      <category term="git" scheme="oohyo.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BFC</title>
+    <link href="oohyo.github.io/2017/08/01/BFC-%E5%9D%97%E7%BA%A7%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8A%E4%B8%8B%E6%96%87/"/>
+    <id>oohyo.github.io/2017/08/01/BFC-块级格式化上下文/</id>
+    <published>2017-08-01T13:00:00.000Z</published>
+    <updated>2017-12-11T10:15:01.887Z</updated>
+    
+    <content type="html"><![CDATA[<p>&#160; &#160; &#160; &#160;前段时间,在写一个积分规则的静态页面时(如图),想了一下便用了最容易想到的方法实现了…之后code review的时候便被指了出来= = 因为前面有一个点,然后下面一行需要和第一行的文字对齐,便选择用白点占位…</p><p><strong>效果图:</strong> </p><p><img src="http://otzmem48k.bkt.clouddn.com/imgs/pointrules/point.png" alt="pic"> </p><p><strong>代码:</strong>  </p><p><img src="http://otzmem48k.bkt.clouddn.com/imgs/pointrules/code.png" alt="pic"></p><p>&#160; &#160; &#160; &#160;显然这么写是不行的,增加了许多没意义的标签,可维护性也不好!整个文本就应该用一个标签包起来,这样也方便维护,所以就了解到了BFC(块级格式化上下文)</p><a id="more"></a><h3 id="1、触发BFC的条件"><a href="#1、触发BFC的条件" class="headerlink" title="1、触发BFC的条件"></a>1、触发BFC的条件</h3><pre><code>float元素；overflow:auto,scroll,hidden,display :inline-block,table,table-caotionposition:absolute,fixed </code></pre><h3 id="2、布局规则"><a href="#2、布局规则" class="headerlink" title="2、布局规则"></a>2、布局规则</h3><ul><li>里面元素不影响外面，完全独立</li><li>从上到下，同一父BFC内margin重叠</li><li>BFC不与浮动元素重叠，浮动参与高度计算、</li><li>内部BFC margin 贴紧 外部border 左或右</li></ul><p><strong>注意:</strong> 在这里是用到了第3条.overflow:hidden触发了BFC,导致自己内部浮动元素高度参与计算,从而避免了高度塌陷.</p><p><strong>改完之后:</strong></p><pre><code>&lt;ul&gt;    &lt;li&gt;        &lt;i class=&quot;dot&quot;&gt;&lt;/i&gt;        &lt;div&gt;积分金额指有效真实消费，仅计算使用现金、信用卡、借记卡、步步高商务卡付款等实际付款金额。&lt;/div&gt;    &lt;/li&gt;    &lt;li&gt;        &lt;i class=&quot;dot&quot;&gt;&lt;/i&gt;        &lt;div&gt;健身卡、课程卡、礼品卡、购买商务卡、优惠券（代金券）等礼券类付款部分、促销活动立减部分及积分抵扣部分、特殊品牌（详见门店公告）不参与积分。&lt;/div&gt;    &lt;/li&gt;&lt;/ul&gt; </code></pre><p>前面的dot需要浮动,文本段加上overflow:hidden即可</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&#160; &#160; &#160; &#160;平时写代码的时候最好不要图快,抱着实现就可以了的想法,做到扩展性强,可读性好,方便维护.</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;前段时间,在写一个积分规则的静态页面时(如图),想了一下便用了最容易想到的方法实现了…之后code review的时候便被指了出来= = 因为前面有一个点,然后下面一行需要和第一行的文字对齐,便选择用白点占位…&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;效果图:&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://otzmem48k.bkt.clouddn.com/imgs/pointrules/point.png&quot; alt=&quot;pic&quot;&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;代码:&lt;/strong&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://otzmem48k.bkt.clouddn.com/imgs/pointrules/code.png&quot; alt=&quot;pic&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;显然这么写是不行的,增加了许多没意义的标签,可维护性也不好!整个文本就应该用一个标签包起来,这样也方便维护,所以就了解到了BFC(块级格式化上下文)&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="oohyo.github.io/tags/css/"/>
+    
+      <category term="布局" scheme="oohyo.github.io/tags/%E5%B8%83%E5%B1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>湄江游记</title>
+    <link href="oohyo.github.io/2017/07/17/%E6%B9%84%E6%B1%9F/"/>
+    <id>oohyo.github.io/2017/07/17/湄江/</id>
+    <published>2017-07-16T23:59:00.000Z</published>
+    <updated>2017-12-11T10:14:51.421Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="旅游"><a href="#旅游" class="headerlink" title="旅游"></a>旅游</h3><p><img src="http://om1a60efb.bkt.clouddn.com/image/lvyou/meijiang_01.jpg?imageView2/2/h/300" alt="meijiang"></p><p><strong><center>[图1]湄江水库大坝</center></strong><br><a id="more"></a><br><img src="http://om1a60efb.bkt.clouddn.com/image/lvyou/meijiang_02.jpg?imageView2/2/h/280" style="float:left"><img src="http://om1a60efb.bkt.clouddn.com/image/lvyou/meijiang_03.jpg?imageView2/2/h/280" style="float:left"><img src="http://om1a60efb.bkt.clouddn.com/image/lvyou/meijiang_04.jpg?imageView2/2/h/280" style="float:left"> </p><div style="clear:both"></div> <p><strong>————————[图1]十里画壁———————————–[图2]大坝眺望——————-[图3]大江口——–</strong>  </p><p>&#160; &#160; &#160; &#160;这里就放这几张图吧,本来我也挺喜欢旅游的,只是因为太懒了,以为没有什么比呆在家里更nice~但这次小旅行改变我的看法.一起爬观音崖,一起去大坝下面找螃蟹,乘船遨游大江口,参观博物馆,爬香炉山…除了这些之外还有一个有意思的项目就是狼人杀了,一直玩到凌晨都舍不得去睡… </p><h3 id="猫"><a href="#猫" class="headerlink" title="猫"></a>猫</h3><p>&#160; &#160; &#160; &#160;最近一直想样一只小猫,原因有很多,没有立马行动也是因为有一些其他顾虑…但是相信不久之后,或者说等工作稳定了,便会立刻去领养一只并对它负责一生吧//</p><h3 id="书"><a href="#书" class="headerlink" title="书"></a>书</h3><p>&#160; &#160; &#160; &#160;看书的话,最近在看[解忧杂货店],之前就看了一半了,计划这个月看完,然后下个月看亲密关系 </p><h3 id="电视剧"><a href="#电视剧" class="headerlink" title="电视剧"></a>电视剧</h3><p>&#160; &#160; &#160; &#160;国产的楚乔传,冲着颖宝和林狗去看的,没看过小说,剧情有点拖沓,勉强能看;美剧-权利的游戏第7季终于在7-17开更了…据说只有第七季和第八季了,龙妈和异鬼在两边杀,所以发便当的速度会非常快~总而言之,这是一部非常值得一看的剧~ </p><h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;旅游&quot;&gt;&lt;a href=&quot;#旅游&quot; class=&quot;headerlink&quot; title=&quot;旅游&quot;&gt;&lt;/a&gt;旅游&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://om1a60efb.bkt.clouddn.com/image/lvyou/meijiang_01.jpg?imageView2/2/h/300&quot; alt=&quot;meijiang&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;center&gt;[图1]湄江水库大坝&lt;/center &gt;&lt;/strong&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="旅游" scheme="oohyo.github.io/categories/%E6%97%85%E6%B8%B8/"/>
+    
+    
+      <category term="随笔" scheme="oohyo.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WebPack学习笔记</title>
+    <link href="oohyo.github.io/2017/06/16/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>oohyo.github.io/2017/06/16/webpack学习笔记/</id>
+    <published>2017-06-15T16:50:00.000Z</published>
+    <updated>2017-12-11T10:15:32.879Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是WebPack"><a href="#什么是WebPack" class="headerlink" title="什么是WebPack?"></a>什么是WebPack?</h2><p>webpack是一个模块打包工具，其可以兼容多种js书写规范，且可以处理模块间的依赖关系，具有更强大的js模块化的功能。</p><h2 id="为什么是WebPack"><a href="#为什么是WebPack" class="headerlink" title="为什么是WebPack"></a>为什么是WebPack</h2><h3 id="1-模块化"><a href="#1-模块化" class="headerlink" title="1.模块化"></a>1.模块化</h3><ul><li>将复杂的程序细分成小模块,通过可以将其他资源转换成 JavaScript 的加载器，实现一切皆模块</li><li>对 CommonJS 、 AMD 、ES6的语法做了兼容，以及特殊模块的 Shim 处理(shim:为那些没有使用define()来声明依赖关系、设置模块的”浏览器全局变量注入”型脚本做依赖和导出配置。) </li><li>CommonJS模块必须通过 module.exports 导出对外的变量或接口，通过 require() 来导入其他模块的输出到当前模块作用域中</li><li>异步加载,模块通过 define 函数定义在闭包中,return返回</li></ul><a id="more"></a><h3 id="2-开发便捷"><a href="#2-开发便捷" class="headerlink" title="2.开发便捷"></a>2.开发便捷</h3><ul><li>能替代部分 grunt/gulp 的工作，比如打包、压缩混淆、图片转base64等</li><li>对 JS、CSS、图片等资源文件都支持打包，配合 loader 加载器，也可以支持 Sass，Less 等 CSS 预处理器</li><li>串联式模块加载器以及插件机制，让其具有更好的灵活性和扩展性，通过 babel-loader 就可以直接使用 ES6 的模块机制</li><li>具有强大的 Plugin 接口，大多是内部插件，使用起来比较灵活。 </li></ul><h3 id="3-性能更优"><a href="#3-性能更优" class="headerlink" title="3.性能更优"></a>3.性能更优</h3><ul><li>基于配置智能分析打包多个文件，实现公共模块按需加载</li><li>在内存中打包，性能更快</li><li>使用异步io,并具有多级缓存</li></ul><h3 id="4-区别于gulp-amp-amp-grunt"><a href="#4-区别于gulp-amp-amp-grunt" class="headerlink" title="4.区别于gulp&amp;&amp;grunt"></a>4.区别于gulp&amp;&amp;grunt</h3><ul><li>Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，这个工具之后可以自动替你完成这些任务。</li><li>Webpack的工作方式是：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个浏览器可识别的JavaScript文件</li></ul><h2 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h2><pre><code>|—— app|   |—— Greeter.js|   |__ main.js|   |__ module.js|   |__ color.scss|   |__ module.js||—— public|   |—— bundle.js|   |__ index.html||—— node_modules        //依赖|__ package.json        //环境配置|__ webpack.config.js   //参数配置</code></pre><h2 id="WebPack安装与配置"><a href="#WebPack安装与配置" class="headerlink" title="WebPack安装与配置"></a>WebPack安装与配置</h2><pre><code>npm install -g webpack              //全局安装npm install --save-dev webpack      //当前项目中安装npm install                         //安装依赖npm install -g webpack-dev-server   //安装webpack开发服务器</code></pre><h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>1.css - ExtractTextPlugin</p><h3 id="WebPack常用命令"><a href="#WebPack常用命令" class="headerlink" title="WebPack常用命令"></a>WebPack常用命令</h3><ul><li>webpack 最基本的启动webpack命令</li><li>webpack -w 提供watch方法，实时进行打包更新</li><li>webpack -p 对打包后的文件进行压缩</li><li>webpack -d 提供SourceMaps，方便调试</li><li>webpack-dev-server –open 静态资源服务器</li></ul><h2 id="静态资源服务器"><a href="#静态资源服务器" class="headerlink" title="静态资源服务器"></a>静态资源服务器</h2><pre><code>npm install -g webpack-dev-server   //安装webpack开发服务器 </code></pre><h2 id="从WebPack-1-X-迁移到-WebPack-2-X"><a href="#从WebPack-1-X-迁移到-WebPack-2-X" class="headerlink" title="从WebPack 1.X 迁移到 WebPack 2.X"></a>从WebPack 1.X 迁移到 WebPack 2.X</h2><h3 id="1-Resolve"><a href="#1-Resolve" class="headerlink" title="1.Resolve"></a>1.Resolve</h3><p>resolve.extensions 不再需要传入空字符串，extensions: [‘’, ‘js’] -&gt; extensions: [‘js’]。</p><h3 id="2-Module-取消了在模块名中自动添加-loader-后缀"><a href="#2-Module-取消了在模块名中自动添加-loader-后缀" class="headerlink" title="2.Module 取消了在模块名中自动添加 -loader 后缀"></a>2.Module 取消了在模块名中自动添加 -loader 后缀</h3><p>module.loaders 修改为 module.rules 。<br>// 为了兼容旧版，module.loaders 语法仍然有效，旧的属性名依然可以被解析<br>Loaders 需要添加 -loader，如 babel -&gt; babel-loader 。</p><pre><code>module: {    rules: [      {        use: [          //&quot;style&quot;,          &quot;style-loader&quot;,          //&quot;css&quot;,          &quot;css-loader&quot;,          //&quot;less&quot;,          &quot;less-loader&quot;,        ]      }    ]  }</code></pre><h3 id="3-链式-loaders"><a href="#3-链式-loaders" class="headerlink" title="3.链式 loaders"></a>3.链式 loaders</h3><p>与 v1 版本相同，loaders 可以链式调用，上一个 loader 的输出被作为输入传给下一个 loader。使用 rule.use 配置项，use 可以设置为一个 loaders 的列表。在 v1 版本中，loaders 通常被用 ! 连写。这一写法在新版中只在使用旧的 module.loaders 时有效。</p><h3 id="4-Extract-Text-Webpack-Plugin"><a href="#4-Extract-Text-Webpack-Plugin" class="headerlink" title="4.Extract-Text-Webpack-Plugin"></a>4.Extract-Text-Webpack-Plugin</h3><pre><code>module: {  rules: [    test: /.css$/,     //loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader&quot;, { publicPath: &quot;/dist&quot; })     loader: ExtractTextPlugin.extract({       fallbackLoader: &quot;style-loader&quot;,       loader: &quot;css-loader&quot;,       publicPath: &quot;/dist&quot;     })  ]} </code></pre><h3 id="567…"><a href="#567…" class="headerlink" title="567…"></a>567…</h3><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul><li>官方文档(<a href="https://webpack.js.org/guides/get-started/" target="_blank" rel="external">https://webpack.js.org/guides/get-started/</a>)</li><li>中文文档(<a href="https://doc.webpack-china.org/guides/get-started/" target="_blank" rel="external">https://doc.webpack-china.org/guides/get-started/</a>)</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么是WebPack&quot;&gt;&lt;a href=&quot;#什么是WebPack&quot; class=&quot;headerlink&quot; title=&quot;什么是WebPack?&quot;&gt;&lt;/a&gt;什么是WebPack?&lt;/h2&gt;&lt;p&gt;webpack是一个模块打包工具，其可以兼容多种js书写规范，且可以处理模块间的依赖关系，具有更强大的js模块化的功能。&lt;/p&gt;
+&lt;h2 id=&quot;为什么是WebPack&quot;&gt;&lt;a href=&quot;#为什么是WebPack&quot; class=&quot;headerlink&quot; title=&quot;为什么是WebPack&quot;&gt;&lt;/a&gt;为什么是WebPack&lt;/h2&gt;&lt;h3 id=&quot;1-模块化&quot;&gt;&lt;a href=&quot;#1-模块化&quot; class=&quot;headerlink&quot; title=&quot;1.模块化&quot;&gt;&lt;/a&gt;1.模块化&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;将复杂的程序细分成小模块,通过可以将其他资源转换成 JavaScript 的加载器，实现一切皆模块&lt;/li&gt;
+&lt;li&gt;对 CommonJS 、 AMD 、ES6的语法做了兼容，以及特殊模块的 Shim 处理(shim:为那些没有使用define()来声明依赖关系、设置模块的”浏览器全局变量注入”型脚本做依赖和导出配置。) &lt;/li&gt;
+&lt;li&gt;CommonJS模块必须通过 module.exports 导出对外的变量或接口，通过 require() 来导入其他模块的输出到当前模块作用域中&lt;/li&gt;
+&lt;li&gt;异步加载,模块通过 define 函数定义在闭包中,return返回&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="WebPack" scheme="oohyo.github.io/categories/WebPack/"/>
+    
+    
+      <category term="WebPack" scheme="oohyo.github.io/tags/WebPack/"/>
+    
+      <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>蜜汁四月</title>
+    <link href="oohyo.github.io/2017/04/24/%E8%9C%9C%E6%B1%81%E5%9B%9B%E6%9C%88/"/>
+    <id>oohyo.github.io/2017/04/24/蜜汁四月/</id>
+    <published>2017-04-23T22:56:33.000Z</published>
+    <updated>2017-12-11T10:14:58.584Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://om1a60efb.bkt.clouddn.com/duorou_04.jpg?imageView2/2/w/450/q/75%7Cimageslim" alt="duorou"><br>:)先秀一波新入的肉吧~ </p><h3 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h3><p>&emsp;&emsp;不知不觉四月已经快过完了，毕业设计还没开始动手，只能我先出手了…<br>学习方面还是没有走什么计划，所以这一次决定定一波计划~<br><a id="more"></a><br>1.毕业论文<br>2.PHP入门，操作数据库<br>3.模拟接口(php/nodejs)</p><h3 id="New-Knowledge"><a href="#New-Knowledge" class="headerlink" title="New Knowledge"></a>New Knowledge</h3><p><strong>chrome控制台调试方法</strong><br>1.Sources 打断点<br>2.Preserve log 保留日志<br>3.Sources - Watch 单步调试，跟踪变量的一生</p><p><strong>loading…</strong>  </p><h4 id="附参考资料："><a href="#附参考资料：" class="headerlink" title="附参考资料："></a>附参考资料：</h4><p><a href="https://segmentfault.com/a/1190000004123527" target="_blank" rel="external">Sources拾遗</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://om1a60efb.bkt.clouddn.com/duorou_04.jpg?imageView2/2/w/450/q/75%7Cimageslim&quot; alt=&quot;duorou&quot;&gt;&lt;br&gt;:)先秀一波新入的肉吧~ &lt;/p&gt;
+&lt;h3 id=&quot;计划&quot;&gt;&lt;a href=&quot;#计划&quot; class=&quot;headerlink&quot; title=&quot;计划&quot;&gt;&lt;/a&gt;计划&lt;/h3&gt;&lt;p&gt;&amp;emsp;&amp;emsp;不知不觉四月已经快过完了，毕业设计还没开始动手，只能我先出手了…&lt;br&gt;学习方面还是没有走什么计划，所以这一次决定定一波计划~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="实习日记" scheme="oohyo.github.io/categories/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="oohyo.github.io/tags/css/"/>
+    
+      <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="template" scheme="oohyo.github.io/tags/template/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习笔记</title>
+    <link href="oohyo.github.io/2017/03/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>oohyo.github.io/2017/03/30/学习笔记/</id>
+    <published>2017-03-29T16:42:00.000Z</published>
+    <updated>2017-12-11T10:14:48.654Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="SSI-服务器端包含"><a href="#SSI-服务器端包含" class="headerlink" title="SSI 服务器端包含"></a>SSI 服务器端包含</h3><h4 id="SSI指令基本格式"><a href="#SSI指令基本格式" class="headerlink" title="SSI指令基本格式"></a>SSI指令基本格式</h4><p>程序代码：<!-- 指令名称="指令参数">如程序代码：\<!--#include file="info.htm"--><br><strong>说明：</strong><br>1．\<!-- -->；是HTML语法中表示注释，当WEB服务器不支持SSI时，会忽略这些信息。　　<br>2．#include 为SSI指令之一。　　<br>3．file 为include的参数，info.htm为参数值，在本指令中指将要包含的文档名。　　<br><strong>注意：</strong><br>1．\&lt;!–与#号间无空格，只有SSI指令与参数间存在空格。　　<br>2．上面的标点=””，一个也不能少。　　<br>3．SSI指令是大小写敏感的，因此参数必须是小写才会起作用。<br><a id="more"></a></p><h4 id="include指令详解"><a href="#include指令详解" class="headerlink" title="include指令详解"></a>include指令详解</h4><ul><li>Virtual：给出到服务器端某个文档的虚拟路径。(相对于网站根目录的路径）</li><li>File：给出当前目录的相对路径其中不能使用”../“，也不能使用绝对路径。(相对于服务器根目录的路径） </li></ul><h4 id="SSI的include对SEO有没有影响？"><a href="#SSI的include对SEO有没有影响？" class="headerlink" title="SSI的include对SEO有没有影响？"></a>SSI的include对SEO有没有影响？</h4><ul><li>除了服务器需要多做一些工作外，通过include和直接写在页面上对外提供的页面内容是相同的，也就不会影响SEO.</li><li>但是不能把头部一些内容比如titile,keywords与description也公用,这样对搜索引擎十分不友好</li><li>参考链接:<a href="http://www.alixixi.com/program/a/2008070720488.shtml" target="_blank" rel="external">使用include对搜索引擎收录是否有影响?</a> </li></ul><h3 id="联调-接口"><a href="#联调-接口" class="headerlink" title="联调-接口"></a>联调-接口</h3><p>接口文档是根据RAP生成的,根据接口文档上的url和字段就可以写ajax请求了<br><strong>大致格式:</strong><br>接口说明: 描述<br>url:XX/XX/XX<br>入参:字段名-字段说明<br>出参:字段名-字段说明 </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;SSI-服务器端包含&quot;&gt;&lt;a href=&quot;#SSI-服务器端包含&quot; class=&quot;headerlink&quot; title=&quot;SSI 服务器端包含&quot;&gt;&lt;/a&gt;SSI 服务器端包含&lt;/h3&gt;&lt;h4 id=&quot;SSI指令基本格式&quot;&gt;&lt;a href=&quot;#SSI指令基本格式&quot; class=&quot;headerlink&quot; title=&quot;SSI指令基本格式&quot;&gt;&lt;/a&gt;SSI指令基本格式&lt;/h4&gt;&lt;p&gt;程序代码：&lt;!-- 指令名称=&quot;指令参数&quot;&gt;
+如程序代码：\&lt;!--#include file=&quot;info.htm&quot;--&gt;&lt;br&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;br&gt;1．\&lt;!-- --&gt;；是HTML语法中表示注释，当WEB服务器不支持SSI时，会忽略这些信息。　　&lt;br&gt;2．#include 为SSI指令之一。　　&lt;br&gt;3．file 为include的参数，info.htm为参数值，在本指令中指将要包含的文档名。　　&lt;br&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;br&gt;1．\&amp;lt;!–与#号间无空格，只有SSI指令与参数间存在空格。　　&lt;br&gt;2．上面的标点=””，一个也不能少。　　&lt;br&gt;3．SSI指令是大小写敏感的，因此参数必须是小写才会起作用。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="实习日记" scheme="oohyo.github.io/categories/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="oohyo.github.io/tags/css/"/>
+    
+      <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="移动端" scheme="oohyo.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前后端联调</title>
+    <link href="oohyo.github.io/2017/03/09/%E5%89%8D%E5%90%8E%E7%AB%AF%E8%81%94%E8%B0%83/"/>
+    <id>oohyo.github.io/2017/03/09/前后端联调/</id>
+    <published>2017-03-09T01:46:00.000Z</published>
+    <updated>2017-12-11T10:14:44.825Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://om1a60efb.bkt.clouddn.com/image/meixi-lake.jpg?imageView2/2/h/300" alt="meixi"></p><h3 id="Task-One-修改links"><a href="#Task-One-修改links" class="headerlink" title="Task One:修改links"></a>Task One:修改links</h3><p>&emsp;&emsp;首先是调链接,将原来的项目clone下来,替换掉部分链接… 看似十分简单的任务,但是我却也GG了几次~MMP,先是链接没有完全改完,漏掉了js文件里的几个没有改,但是这并不重要,重要的是根本就没有发布 - -//<br>&emsp;&emsp;最后,经过一顿折终于是发布到了测试环境上让java老哥跑了起来~<br><a id="more"></a></p><h3 id="Task-Two-添加dom元素"><a href="#Task-Two-添加dom元素" class="headerlink" title="Task Two:添加dom元素"></a>Task Two:添加dom元素</h3><p>&emsp;&emsp;嗨呀,改这个并没有什么难度..但还是遇到了几个问题,比如在没有服务器环境的情况下如何看到修改后页面的效果,mootools和jq的冲突啊,等等…<br><strong>调试问题是用Fiddler解决的,具体方法:</strong><br>1.用Fiddler查看页面的数据流列表，找到这个需要修改文件的session<br>2.将文件保存到本地<br>3.开启Fiddler的请求自动重定向功能<br>4.创建重定向规则，将目标是这个文件网上url请求重定向到本地文件<br>5.修改本地文件，进行测试</p><p><strong>冲突问题用jQuery.noConflict()</strong><br>1.原因是mootools或其他js插件库的$起了冲突<br>2.先引用jq,然后插入 <strong>var jq = jQuery.noConflict()</strong> 之后再引用mootools或其他js插件库;还有要注意的就是如果你还要使用jq的插件的话,记得手动把插件里的$符都改成jq !!! 使用编辑器的快捷键1S就搞定了,这里就不多提了~<br>3.用jq操作dom的时候和平时用一样,只不过将$换成jq罢了</p><h3 id="面临的问题"><a href="#面临的问题" class="headerlink" title="面临的问题"></a>面临的问题</h3><ul><li>获取数据是不是也要用mootools模版</li><li>省市区控件(到底是否可以引入JQ),dom操作能不能用jq</li><li>接口格式不知道..java老哥说和之前的不一样</li><li><a href="http://fis.baidu.com/fis3/docs/node-mock.html" target="_blank" rel="external">mock数据</a>具体操作</li><li>怎么模拟接口数据让fiddler抓取</li></ul><hr><p><strong>最后，由于本人还是前端路上的小菜鸟，见识有限，才疏学浅，有表述错误的地方，还请指正，以上。</strong></p><h4 id="附参考资料："><a href="#附参考资料：" class="headerlink" title="附参考资料："></a>附参考资料：</h4><p><a href="http://fis.baidu.com/fis3/docs/node-mock.html" target="_blank" rel="external">Mock 假数据模拟</a><br><a href="http://www.frontopen.com/911.html" target="_blank" rel="external">冲突的解决办法</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://om1a60efb.bkt.clouddn.com/image/meixi-lake.jpg?imageView2/2/h/300&quot; alt=&quot;meixi&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Task-One-修改links&quot;&gt;&lt;a href=&quot;#Task-One-修改links&quot; class=&quot;headerlink&quot; title=&quot;Task One:修改links&quot;&gt;&lt;/a&gt;Task One:修改links&lt;/h3&gt;&lt;p&gt;&amp;emsp;&amp;emsp;首先是调链接,将原来的项目clone下来,替换掉部分链接… 看似十分简单的任务,但是我却也GG了几次~MMP,先是链接没有完全改完,漏掉了js文件里的几个没有改,但是这并不重要,重要的是根本就没有发布 - -//&lt;br&gt;&amp;emsp;&amp;emsp;最后,经过一顿折终于是发布到了测试环境上让java老哥跑了起来~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="实习日记" scheme="oohyo.github.io/categories/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="Mootools" scheme="oohyo.github.io/tags/Mootools/"/>
+    
+      <category term="联调" scheme="oohyo.github.io/tags/%E8%81%94%E8%B0%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于移动端适配</title>
+    <link href="oohyo.github.io/2017/03/01/%E5%85%B3%E4%BA%8E%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D/"/>
+    <id>oohyo.github.io/2017/03/01/关于移动端适配/</id>
+    <published>2017-02-28T23:42:10.000Z</published>
+    <updated>2017-12-11T10:14:40.785Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="设备的像素比-device-pixel-ratio-简称DPR"><a href="#设备的像素比-device-pixel-ratio-简称DPR" class="headerlink" title="设备的像素比(device pixel ratio)简称DPR"></a>设备的像素比(device pixel ratio)简称DPR</h3><h5 id="1-物理像素-physical-pixel"><a href="#1-物理像素-physical-pixel" class="headerlink" title="1.物理像素(physical pixel)"></a>1.物理像素(physical pixel)</h5><p>我们看到的每个屏幕都是由一颗颗我们肉眼难以看到的小颗粒（物理像素）组成的。 </p><h5 id="2-逻辑像素"><a href="#2-逻辑像素" class="headerlink" title="2.逻辑像素"></a>2.逻辑像素</h5><p>是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说CSS像素)。 </p><pre><code>DPR = 物理像素 / 逻辑像素 </code></pre><big><strong>方法</strong>:利用js计算当前设备的DPR，动态设置在html标签上，并动态设置html的font-size，利用css的选择器根据DPR来设置不同DPR下的字体大小-&gt;下面贴代码</big><a id="more"></a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div></pre></td><td class="code"><pre><div class="line">!<span class="function"><span class="keyword">function</span>(<span class="params">win, lib</span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> timer,</div><div class="line">    doc     = win.document,</div><div class="line">    docElem = doc.documentElement,</div><div class="line"></div><div class="line">    vpMeta   = doc.querySelector(<span class="string">'meta[name="viewport"]'</span>),</div><div class="line">    flexMeta = doc.querySelector(<span class="string">'meta[name="flexible"]'</span>),</div><div class="line"></div><div class="line">    dpr   = <span class="number">0</span>,</div><div class="line">    scale = <span class="number">0</span>,</div><div class="line"></div><div class="line">    flexible = lib.flexible || (lib.flexible = &#123;&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 设置了 viewport meta</span></div><div class="line"><span class="keyword">if</span> (vpMeta) &#123;</div><div class="line"></div><div class="line">    <span class="built_in">console</span>.warn(<span class="string">"将根据已有的meta标签来设置缩放比例"</span>);</div><div class="line">    <span class="keyword">var</span> initial = vpMeta.getAttribute(<span class="string">"content"</span>).match(<span class="regexp">/initial\-scale=([\d\.]+)/</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (initial) &#123;</div><div class="line">        scale = <span class="built_in">parseFloat</span>(initial[<span class="number">1</span>]); <span class="comment">// 已设置的 initialScale</span></div><div class="line">        dpr = <span class="built_in">parseInt</span>(<span class="number">1</span> / scale);      <span class="comment">// 设备像素比 devicePixelRatio</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="comment">// 设置了 flexible Meta</span></div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (flexMeta) &#123;</div><div class="line">    <span class="keyword">var</span> flexMetaContent = flexMeta.getAttribute(<span class="string">"content"</span>);</div><div class="line">    <span class="keyword">if</span> (flexMetaContent) &#123;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> initial = flexMetaContent.match(<span class="regexp">/initial\-dpr=([\d\.]+)/</span>),</div><div class="line">            maximum = flexMetaContent.match(<span class="regexp">/maximum\-dpr=([\d\.]+)/</span>);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (initial) &#123;</div><div class="line">            dpr = <span class="built_in">parseFloat</span>(initial[<span class="number">1</span>]);</div><div class="line">            scale = <span class="built_in">parseFloat</span>((<span class="number">1</span> / dpr).toFixed(<span class="number">2</span>));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (maximum) &#123;</div><div class="line">            dpr = <span class="built_in">parseFloat</span>(maximum[<span class="number">1</span>]);</div><div class="line">            scale = <span class="built_in">parseFloat</span>((<span class="number">1</span> / dpr).toFixed(<span class="number">2</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// viewport 或 flexible</span></div><div class="line"><span class="comment">// meta 均未设置</span></div><div class="line"><span class="keyword">if</span> (!dpr &amp;&amp; !scale) &#123;</div><div class="line">    <span class="comment">// QST</span></div><div class="line">    <span class="comment">// 这里的 第一句有什么用 ?</span></div><div class="line">    <span class="comment">// 和 Android 有毛关系 ?</span></div><div class="line">    <span class="keyword">var</span> u = (win.navigator.appVersion.match(<span class="regexp">/android/gi</span>), win.navigator.appVersion.match(<span class="regexp">/iphone/gi</span>)),</div><div class="line">        _dpr = win.devicePixelRatio;</div><div class="line"></div><div class="line">    <span class="comment">// 所以这里似乎是将所有 Android 设备都设置为 1 了</span></div><div class="line">    dpr = u ? ( (_dpr &gt;= <span class="number">3</span> &amp;&amp; (!dpr || dpr &gt;= <span class="number">3</span>))</div><div class="line">                    ? <span class="number">3</span></div><div class="line">                    : (_dpr &gt;= <span class="number">2</span> &amp;&amp; (!dpr || dpr &gt;= <span class="number">2</span>))</div><div class="line">                        ? <span class="number">2</span></div><div class="line">                        : <span class="number">1</span></div><div class="line">              )</div><div class="line">            : <span class="number">1</span>;</div><div class="line"></div><div class="line">    scale = <span class="number">1</span> / dpr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">docElem.setAttribute(<span class="string">"data-dpr"</span>, dpr);</div><div class="line"></div><div class="line"><span class="comment">// 插入 viewport meta</span></div><div class="line"><span class="keyword">if</span> (!vpMeta) &#123;</div><div class="line">    vpMeta = doc.createElement(<span class="string">"meta"</span>);</div><div class="line">     </div><div class="line">    vpMeta.setAttribute(<span class="string">"name"</span>, <span class="string">"viewport"</span>);</div><div class="line">    vpMeta.setAttribute(<span class="string">"content"</span>,</div><div class="line">        <span class="string">"initial-scale="</span> + scale + <span class="string">", maximum-scale="</span> + scale + <span class="string">", minimum-scale="</span> + scale + <span class="string">", user-scalable=no"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (docElem.firstElementChild) &#123;</div><div class="line">        docElem.firstElementChild.appendChild(vpMeta)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">var</span> div = doc.createElement(<span class="string">"div"</span>);</div><div class="line">        div.appendChild(vpMeta);</div><div class="line">        doc.write(div.innerHTML);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setFontSize</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> winWidth = docElem.getBoundingClientRect().width;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (winWidth / dpr &gt; <span class="number">540</span>) &#123;</div><div class="line">        (winWidth = <span class="number">540</span> * dpr);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 根节点 fontSize 根据宽度决定</span></div><div class="line">    <span class="keyword">var</span> baseSize = winWidth / <span class="number">10</span>;</div><div class="line"></div><div class="line">    docElem.style.fontSize = baseSize + <span class="string">"px"</span>;</div><div class="line">    flexible.rem = win.rem = baseSize;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 调整窗口时重置</span></div><div class="line">win.addEventListener(<span class="string">"resize"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    clearTimeout(timer);</div><div class="line">    timer = setTimeout(setFontSize, <span class="number">300</span>);</div><div class="line">&#125;, <span class="literal">false</span>);</div><div class="line"></div><div class="line"> </div><div class="line"><span class="comment">// 这一段是我自己加的</span></div><div class="line"><span class="comment">// orientationchange 时也需要重算下吧</span></div><div class="line">win.addEventListener(<span class="string">"orientationchange"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    clearTimeout(timer);</div><div class="line">    timer = setTimeout(setFontSize, <span class="number">300</span>);</div><div class="line">&#125;, <span class="literal">false</span>);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// pageshow</span></div><div class="line"><span class="comment">// keyword: 倒退 缓存相关</span></div><div class="line">win.addEventListener(<span class="string">"pageshow"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (e.persisted) &#123;</div><div class="line">        clearTimeout(timer);</div><div class="line">        timer = setTimeout(setFontSize, <span class="number">300</span>);</div><div class="line">    &#125;</div><div class="line">&#125;, <span class="literal">false</span>);</div><div class="line"></div><div class="line"><span class="comment">// 设置基准字体</span></div><div class="line"><span class="keyword">if</span> (<span class="string">"complete"</span> === doc.readyState) &#123;</div><div class="line">    doc.body.style.fontSize = <span class="number">12</span> * dpr + <span class="string">"px"</span>;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    doc.addEventListener(<span class="string">"DOMContentLoaded"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        doc.body.style.fontSize = <span class="number">12</span> * dpr + <span class="string">"px"</span>;</div><div class="line">    &#125;, <span class="literal">false</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">setFontSize();</div><div class="line"></div><div class="line">flexible.dpr = win.dpr = dpr;</div><div class="line"></div><div class="line">flexible.refreshRem = setFontSize;</div><div class="line"></div><div class="line">flexible.rem2px = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> c = <span class="built_in">parseFloat</span>(d) * <span class="keyword">this</span>.rem;</div><div class="line">    <span class="keyword">if</span> (<span class="string">"string"</span> == <span class="keyword">typeof</span> d &amp;&amp; d.match(<span class="regexp">/rem$/</span>)) &#123;</div><div class="line">        c += <span class="string">"px"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> c;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">flexible.px2rem = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> c = <span class="built_in">parseFloat</span>(d) / <span class="keyword">this</span>.rem;</div><div class="line">     </div><div class="line">    <span class="keyword">if</span> (<span class="string">"string"</span> == <span class="keyword">typeof</span> d &amp;&amp; d.match(<span class="regexp">/px$/</span>)) &#123;</div><div class="line">        c += <span class="string">"rem"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> c;</div><div class="line">&#125;</div><div class="line">&#125;(<span class="built_in">window</span>, <span class="built_in">window</span>.lib || (<span class="built_in">window</span>.lib = &#123;&#125;));</div></pre></td></tr></table></figure><p><strong>今天自己写适配的时候,把头文件大概都看了一下</strong></p><p><img src="http://om1a60efb.bkt.clouddn.com/meta-code.png" alt="code"></p><hr><p><strong>最后，由于本人还是前端路上的小菜鸟，见识有限，才疏学浅，有表述错误的地方，还请指正，以上。</strong></p><h4 id="附参考资料："><a href="#附参考资料：" class="headerlink" title="附参考资料："></a>附参考资料：</h4><p><a href="http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html" target="_blank" rel="external">淘宝移动端适配方案</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;设备的像素比-device-pixel-ratio-简称DPR&quot;&gt;&lt;a href=&quot;#设备的像素比-device-pixel-ratio-简称DPR&quot; class=&quot;headerlink&quot; title=&quot;设备的像素比(device pixel ratio)简称DPR&quot;&gt;&lt;/a&gt;设备的像素比(device pixel ratio)简称DPR&lt;/h3&gt;&lt;h5 id=&quot;1-物理像素-physical-pixel&quot;&gt;&lt;a href=&quot;#1-物理像素-physical-pixel&quot; class=&quot;headerlink&quot; title=&quot;1.物理像素(physical pixel)&quot;&gt;&lt;/a&gt;1.物理像素(physical pixel)&lt;/h5&gt;&lt;p&gt;我们看到的每个屏幕都是由一颗颗我们肉眼难以看到的小颗粒（物理像素）组成的。 &lt;/p&gt;
+&lt;h5 id=&quot;2-逻辑像素&quot;&gt;&lt;a href=&quot;#2-逻辑像素&quot; class=&quot;headerlink&quot; title=&quot;2.逻辑像素&quot;&gt;&lt;/a&gt;2.逻辑像素&lt;/h5&gt;&lt;p&gt;是计算机坐标系统中的一个点，这个点代表一个可以由程序使用的虚拟像素(比如说CSS像素)。 &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DPR = 物理像素 / 逻辑像素 
+&lt;/code&gt;&lt;/pre&gt;&lt;big&gt;&lt;strong&gt;方法&lt;/strong&gt;:利用js计算当前设备的DPR，动态设置在html标签上，并动态设置html的font-size，利用css的选择器根据DPR来设置不同DPR下的字体大小-&amp;gt;下面贴代码&lt;/big&gt;
+    
+    </summary>
+    
+      <category term="移动端" scheme="oohyo.github.io/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+    
+      <category term="学习笔记" scheme="oohyo.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>皮皮虾,我们走</title>
+    <link href="oohyo.github.io/2017/02/28/%E7%9A%AE%E7%9A%AE%E8%99%BE-%E6%88%91%E4%BB%AC%E8%B5%B0/"/>
+    <id>oohyo.github.io/2017/02/28/皮皮虾-我们走/</id>
+    <published>2017-02-27T23:34:37.000Z</published>
+    <updated>2017-12-11T10:14:54.855Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://om1a60efb.bkt.clouddn.com/duorou_0.png" alt="duorou"></p><h2 id="曾经的多肉"><a href="#曾经的多肉" class="headerlink" title="曾经的多肉"></a>曾经的多肉</h2><ul><li>黄金万年草</li><li>小黄花-照波</li><li>红宝石 </li><li>吉娃娃 </li><li>小雪莲 </li></ul><a id="more"></a><ul><li>姬玉露</li><li>观音莲</li><li>桃蛋</li><li>白熊童子</li></ul><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p>在这半年里,学会了很多关于养护植物的知识,觉得这些小植物也挺有意思的,虽然跑来跑去拿快递有点麻烦…</p><ul><li>邮件(zgc7788#gmail.com, 把#换成@)</li><li>QQ: 839153198</li><li>weibo: <a href="http://weibo.com/er567" target="_blank" rel="external">@er_567</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://om1a60efb.bkt.clouddn.com/duorou_0.png&quot; alt=&quot;duorou&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;曾经的多肉&quot;&gt;&lt;a href=&quot;#曾经的多肉&quot; class=&quot;headerlink&quot; title=&quot;曾经的多肉&quot;&gt;&lt;/a&gt;曾经的多肉&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;黄金万年草&lt;/li&gt;
+&lt;li&gt;小黄花-照波&lt;/li&gt;
+&lt;li&gt;红宝石 &lt;/li&gt;
+&lt;li&gt;吉娃娃 &lt;/li&gt;
+&lt;li&gt;小雪莲 &lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="多肉" scheme="oohyo.github.io/categories/%E5%A4%9A%E8%82%89/"/>
+    
+    
+      <category term="随笔" scheme="oohyo.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+</feed>
