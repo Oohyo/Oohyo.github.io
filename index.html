@@ -167,6 +167,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-vue学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/02/vue学习记录/">vue学习记录</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/02/vue学习记录/" class="archive-article-date">
+  	<time datetime="2018-03-02T12:13:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="待写…"><a href="#待写…" class="headerlink" title="待写…"></a>待写…</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Mint Ui</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/学习笔记/" class="article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/02/vue学习记录/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-别改变浏览器访问历史记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -193,7 +274,8 @@
 <p><strong>原因：</strong>浏览器版本，导致进页面就默认触发了popstate，导致了代码段执行，可以用下面的代码解决。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">params</span>:&#123;<span class="attr">isRun</span>: <span class="literal">false</span>&#125;,</div><div class="line">    <span class="attr">backTo</span>:&#123;</div><div class="line">        <span class="comment">//图一代码段</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">initBack</span>:&#123;</div><div class="line">       <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line">       self.param.isRun = <span class="literal">false</span>;  </div><div class="line">       setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; self.param.isRun = <span class="literal">true</span>; &#125;, <span class="number">1000</span>); <span class="comment">//延迟1秒 防止微信返回立即执行popstate事件  </span></div><div class="line">       self.backTo();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="浏览器缓存问题"><a href="#浏览器缓存问题" class="headerlink" title="浏览器缓存问题"></a>浏览器缓存问题</h3><p>1.如是跳转页面 可以加时间戳<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//调用</span></div><div class="line">timestamp(getReferrer())</div></pre></td></tr></table></figure></p>
         
-          <a class="article-more-a" href="/2018/01/31/别改变浏览器访问历史记录/#more">more >></a>
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2018/01/31/别改变浏览器访问历史记录/#more">more >></a> -->
         
       
 
@@ -473,7 +555,8 @@ onLoad: function (options) {
 <p>然后<strong>三月份</strong>就进入到了轨道，开始了正式的工作以及学习。刚开始对于模块化开发、requirejs、单例模式、MVC/MVVM框架都挺陌生，但后来接触熟悉之后发现也就这样，不过倒是发现前端的分支是真的多，以后还有很长的路要走…</p>
 <p>到了<strong>六七月</strong>份忙着毕业设计和答辩，原以为还得认真准备的还特地请了半个月的假，结果也就是走了个过场，不过总算是顺利毕业。毕业之后便和佛在西门租了个两室一厅过起了潇洒的日子，刚开始不觉得，现在想想还是有点想念那时候。翻了下相册，七月还和同事一起去了趟娄底湄江旅游，山水非常nice；<br><img src="https://t1.aixinxi.net/o_1c4dp9kvqgekpe12vcu3j1dn3a.jpg-w.jpg" alt="湄江"><br>
         
-          <a class="article-more-a" href="/2018/01/01/2017年度总结/#more">more >></a>
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2018/01/01/2017年度总结/#more">more >></a> -->
         
       
 
@@ -509,94 +592,6 @@ onLoad: function (options) {
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/01/01/2017年度总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-nginx-https" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/12/nginx-https/">window nginx配置https相关问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/12/nginx-https/" class="archive-article-date">
-  	<time datetime="2017-12-11T18:00:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>[emerg] BIO_new_file(“/usr/local/nginx/conf/cert/214291778530222.pem”) failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen(‘/usr/local/nginx/conf/cert/214291778530222.pem’,’r’) error:2006D080:BIO routines:BIO_new_file:no such file) failed. </li>
-</ol>
-<p>=&gt;原因未知，将证书和key的路径改成相对路径就可以了</p>
-<ol>
-<li>[emerg] shared zone “SSL” has no equal addresses: 02CC0000 vs 02CB0000</li>
-</ol>
-<p>=&gt;错误原因：ssl_protocols SSLv2 SSLv3 TLSv1 应该是协议配置的问题<br>=&gt;解决办法：ssl_protocols  SSLv3 TLSv1 TLSv1.1 TLSv1.2;</p>
-<ol>
-<li>如果是include vhost里的配置，则vhost里的conf配置也要加上listen 443;</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/学习笔记/" class="article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/12/nginx-https/">展开全文 >></a>
         </p>
       
 
@@ -786,26 +781,6 @@ onLoad: function (options) {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -815,6 +790,22 @@ onLoad: function (options) {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">年度总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -834,7 +825,7 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -842,15 +833,7 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Mootools</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">联调</a>
+                <a href="javascript:void(0)" class="js-tag color3">Mint Ui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -859,6 +842,30 @@ onLoad: function (options) {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">h5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Mootools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">联调</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -871,10 +878,6 @@ onLoad: function (options) {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动画</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年度总结</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -167,6 +167,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nginx-https" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/12/nginx-https/">window nginx配置https相关问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/12/nginx-https/" class="archive-article-date">
+  	<time datetime="2017-12-11T18:00:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>[emerg] BIO_new_file(“/usr/local/nginx/conf/cert/214291778530222.pem”) failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen(‘/usr/local/nginx/conf/cert/214291778530222.pem’,’r’) error:2006D080:BIO routines:BIO_new_file:no such file) failed. </li>
+</ol>
+<p>=&gt;原因未知，将证书和key的路径改成相对路径就可以了</p>
+<ol>
+<li>[emerg] shared zone “SSL” has no equal addresses: 02CC0000 vs 02CB0000</li>
+</ol>
+<p>=&gt;错误原因：ssl_protocols SSLv2 SSLv3 TLSv1 应该是协议配置的问题<br>=&gt;解决办法：ssl_protocols  SSLv3 TLSv1 TLSv1.1 TLSv1.2;</p>
+<ol>
+<li>如果是include vhost里的配置，则vhost里的conf配置也要加上listen 443;</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/学习笔记/" class="article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/12/nginx-https/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-VScode终端乱码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -191,7 +279,8 @@
 <h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>Windows 内置了一个叫 “chcp” 的命令，它可以修改要显示的字符集编码的编号。UTF-8 的编号是 65001，所以启动 cmd 或者 powershell 以后可以手动输入：chcp 65001来改变编码。 </p>
 <p>启动 powershell 的时候带上修改编码的参数: “chcp.com 65001” 即可做到自动设置编码。设置如下:<br>
         
-          <a class="article-more-a" href="/2017/11/29/VScode终端乱码/#more">more >></a>
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2017/11/29/VScode终端乱码/#more">more >></a> -->
         
       
 
@@ -276,7 +365,8 @@
 <p>如果格式有误则会抛出类似‘IndentationError: unexpected indent’的错误。</p>
 <p>空格与tab不能混用，否则会报错。所以还是用两个空格吧&gt;&lt;</p>
         
-          <a class="article-more-a" href="/2017/11/25/pyhton学习笔记(一)/#more">more >></a>
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2017/11/25/pyhton学习笔记(一)/#more">more >></a> -->
         
       
 
@@ -354,7 +444,8 @@
 <p><strong>效果图:</strong> </p>
 <p><img src="https://t1.aixinxi.net/o_1bvmkgrdh14ls1uuqkmr1n08udja.png-w.jpg" alt="pic"> </p>
         
-          <a class="article-more-a" href="/2017/11/11/ibeacons后台/#more">more >></a>
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2017/11/11/ibeacons后台/#more">more >></a> -->
         
       
 
@@ -458,7 +549,8 @@
 </li>
 </ul>
         
-          <a class="article-more-a" href="/2017/09/21/chiji/#more">more >></a>
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2017/09/21/chiji/#more">more >></a> -->
         
       
 
@@ -494,116 +586,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/09/21/chiji/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-css4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/css4/">css4新特性</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/css4/" class="archive-article-date">
-  	<time datetime="2017-08-23T13:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><a href="http://css4-selectors.com/selector/css4/negation-pseudo-class/">:not</a> </li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:not(s1, s2, ...) &#123;&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>在css3中仅能匹配一个选择器,css4中可以匹配多个;</p>
-<p>:not([data-xxx=”xx”],[data-xxx=”xxx”]);</p>
-<p>可以用:not()来提高优先级 e.g .negation:not(p){ color:blue; }  .negation { color: black; }</p>
-<p>仅支持safari</p>
-</blockquote>
-<ol>
-<li><a href="http://css4-selectors.com/selector/css4/matches-any-pseudo-class/">:matches</a> </li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">E:matches(s1, s2) &#123;&#125;</div><div class="line">E:-webkit-any(s1, s2, ...) &#123;&#125;</div><div class="line">E:-moz-any(s1, s2, ...) &#123;&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>意义与:not()相反,匹配对应选择器,简化重复的规则</p>
-<p>:matches(span, div) :matches(span, div) {}</p>
-<p>支持大部分主流浏览器,不支持ie和Edge(win10内置浏览器)</p>
-</blockquote>
-<ol>
-<li><a href="http://css4-selectors.com/selector/css4/relational-pseudo-class/">:has</a> </li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">E:has(rs1, rs2, ...)</div></pre></td></tr></table></figure>
-<blockquote>
-<p>包含伪类选择器,匹配选择器</p>
-<p>暂时没有浏览器支持</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/08/23/css4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">兼容性</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/学习笔记/" class="article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/css4/">展开全文 >></a>
         </p>
       
 
@@ -793,26 +775,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -822,6 +784,22 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">年度总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -841,7 +819,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -849,15 +827,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Mootools</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">联调</a>
+                <a href="javascript:void(0)" class="js-tag color3">Mint Ui</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -866,6 +836,30 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">h5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Mootools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">联调</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -878,10 +872,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动画</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年度总结</a>
               </li>
              
               <li class="article-tag-list-item">
