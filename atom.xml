@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="oohyo.github.io/"/>
-  <updated>2018-03-01T12:33:29.332Z</updated>
+  <updated>2018-03-02T09:16:52.995Z</updated>
   <id>oohyo.github.io/</id>
   
   <author>
@@ -21,15 +21,16 @@
     <link href="oohyo.github.io/2018/03/02/vue%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     <id>oohyo.github.io/2018/03/02/vue学习记录/</id>
     <published>2018-03-02T12:13:14.000Z</published>
-    <updated>2018-03-01T12:33:29.332Z</updated>
+    <updated>2018-03-02T09:16:52.995Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="待写…"><a href="#待写…" class="headerlink" title="待写…"></a>待写…</h3>]]></content>
+    <content type="html"><![CDATA[<p>没有先后顺序，想到什么就写什么吧。</p><h4 id="npm-start的时候正常有样式但npm-run-build之后没有样式"><a href="#npm-start的时候正常有样式但npm-run-build之后没有样式" class="headerlink" title="npm start的时候正常有样式但npm run build之后没有样式"></a>npm start的时候正常有样式但npm run build之后没有样式</h4><h4 id="跳转同一路由不同参数，页面不会刷新"><a href="#跳转同一路由不同参数，页面不会刷新" class="headerlink" title="跳转同一路由不同参数，页面不会刷新"></a>跳转同一路由不同参数，页面不会刷新</h4><h4 id="父子组件传值的问题"><a href="#父子组件传值的问题" class="headerlink" title="父子组件传值的问题"></a>父子组件传值的问题</h4><h4 id="自定义指令directives（钩子函数及参数）详见官网"><a href="#自定义指令directives（钩子函数及参数）详见官网" class="headerlink" title="自定义指令directives（钩子函数及参数）详见官网"></a>自定义指令directives（钩子函数及参数）详见官网</h4><p><a href="https://cn.vuejs.org/v2/guide/custom-directive.html#钩子函数" target="_blank" rel="external">钩子函数</a>：bind/inserted/updata/componentUpdated/unbind</p><p><a href="https://cn.vuejs.org/v2/guide/custom-directive.html#钩子函数参数" target="_blank" rel="external">钩子函数参数</a>：el/binding(传参对象)/vnode/oldVnode</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;待写…&quot;&gt;&lt;a href=&quot;#待写…&quot; class=&quot;headerlink&quot; title=&quot;待写…&quot;&gt;&lt;/a&gt;待写…&lt;/h3&gt;
+        &lt;p&gt;没有先后顺序，想到什么就写什么吧。&lt;/p&gt;
+&lt;h4 id=&quot;npm-start的时候正常有样式但npm-run-build之后没有样式&quot;&gt;&lt;a href=&quot;#npm-start的时候正常有样式但npm-run-build之后没有样式&quot; class=&quot;headerlink&quot; 
       
     
     </summary>
