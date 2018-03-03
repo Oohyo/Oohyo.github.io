@@ -188,9 +188,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>没有先后顺序，想到什么就写什么吧。</p>
-<h4 id="npm-start的时候正常有样式但npm-run-build之后没有样式"><a href="#npm-start的时候正常有样式但npm-run-build之后没有样式" class="headerlink" title="npm start的时候正常有样式但npm run build之后没有样式"></a>npm start的时候正常有样式但npm run build之后没有样式</h4><h4 id="跳转同一路由不同参数，页面不会刷新"><a href="#跳转同一路由不同参数，页面不会刷新" class="headerlink" title="跳转同一路由不同参数，页面不会刷新"></a>跳转同一路由不同参数，页面不会刷新</h4><h4 id="父子组件传值的问题"><a href="#父子组件传值的问题" class="headerlink" title="父子组件传值的问题"></a>父子组件传值的问题</h4><h4 id="自定义指令directives（钩子函数及参数）详见官网"><a href="#自定义指令directives（钩子函数及参数）详见官网" class="headerlink" title="自定义指令directives（钩子函数及参数）详见官网"></a>自定义指令directives（钩子函数及参数）详见官网</h4><p><a href="https://cn.vuejs.org/v2/guide/custom-directive.html#钩子函数" target="_blank" rel="external">钩子函数</a>：bind/inserted/updata/componentUpdated/unbind</p>
-<p><a href="https://cn.vuejs.org/v2/guide/custom-directive.html#钩子函数参数" target="_blank" rel="external">钩子函数参数</a>：el/binding(传参对象)/vnode/oldVnode</p>
-
+<h4 id="npm-start的时候正常有样式但npm-run-build之后没有样式"><a href="#npm-start的时候正常有样式但npm-run-build之后没有样式" class="headerlink" title="npm start的时候正常有样式但npm run build之后没有样式"></a>npm start的时候正常有样式但npm run build之后没有样式</h4><blockquote>
+<p>原因：样式被覆盖了<br>解决：main.js里将router在引入ui组件之前引入或者组件样式加scoped<br>注意组件嵌套的层级合理布局，最好每个分组组件的样式都独立，公用样式抽离</p>
+</blockquote>
+<h4 id="跳转同一路由不同参数，页面不会刷新"><a href="#跳转同一路由不同参数，页面不会刷新" class="headerlink" title="跳转同一路由不同参数，页面不会刷新"></a>跳转同一路由不同参数，页面不会刷新</h4><blockquote>
+<p>原因：组件复用，没有重新加载组件<br>解决：监听路由的变化执行数据变化的时候请求数据的方法，页面初始化的时候也调用一次</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">mounted() &#123;</div><div class="line">    <span class="keyword">this</span>.author = <span class="keyword">this</span>.$store.state.demo.author;</div><div class="line">    <span class="keyword">this</span>.getTheme(<span class="string">`/<span class="subst">$&#123;<span class="keyword">this</span>.$route.params.id&#125;</span>`</span>);</div><div class="line">&#125;,</div><div class="line"><span class="attr">methods</span>: &#123;</div><div class="line">    getTheme(id) &#123;</div><div class="line">        <span class="keyword">this</span>.$ajax.get(url + id).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">            <span class="comment">//传参或者拼接url 视接口而定</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;,</div><div class="line">beforeRouteUpdate(to, <span class="keyword">from</span>, next) &#123;</div><div class="line">    <span class="keyword">this</span>.getTheme(<span class="string">`/<span class="subst">$&#123;to.params.id&#125;</span>`</span>);</div><div class="line">    next();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2018/03/02/vue学习记录/#more">more >></a> -->
+        
       
 
       
@@ -796,11 +804,15 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -852,10 +864,6 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
@@ -864,15 +872,15 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Mootools</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">联调</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
               </li>
              
               <li class="article-tag-list-item">
