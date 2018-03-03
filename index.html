@@ -60,6 +60,8 @@
 	        
 				<li><a href="/tags/随笔/">随笔</a></li>
 	        
+				<li><a href="/photos">相册</a></li>
+	        
 				<li><a href="https://luuman.github.io/FrontEndGuide/V1/index.html">前端导航</a></li>
 	        
 			</ul>
@@ -124,6 +126,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -146,11 +150,13 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 25%"><a href="/tags/随笔/">随笔</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="https://luuman.github.io/FrontEndGuide/V1/index.html">前端导航</a></li>
+					<li style="width: 25%"><a href="/photos">相册</a></li>
+		        
+					<li style="width: 25%"><a href="https://luuman.github.io/FrontEndGuide/V1/index.html">前端导航</a></li>
 		        
 				</ul>
 			</nav>
@@ -174,13 +180,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/02/vue学习记录/">vue学习记录</a>
+      <a class="article-title" href="/2018/02/15/vue学习记录/">vue学习记录</a>
     </h1>
   
 
         
-        <a href="/2018/03/02/vue学习记录/" class="archive-article-date">
-  	<time datetime="2018-03-02T12:13:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-02</time>
+        <a href="/2018/02/15/vue学习记录/" class="archive-article-date">
+  	<time datetime="2018-02-15T12:13:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-15</time>
 </a>
         
       </header>
@@ -197,7 +203,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">mounted() &#123;</div><div class="line">    <span class="keyword">this</span>.author = <span class="keyword">this</span>.$store.state.demo.author;</div><div class="line">    <span class="keyword">this</span>.getTheme(<span class="string">`/<span class="subst">$&#123;<span class="keyword">this</span>.$route.params.id&#125;</span>`</span>);</div><div class="line">&#125;,</div><div class="line"><span class="attr">methods</span>: &#123;</div><div class="line">    getTheme(id) &#123;</div><div class="line">        <span class="keyword">this</span>.$ajax.get(url + id).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">            <span class="comment">//传参或者拼接url 视接口而定</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;,</div><div class="line">beforeRouteUpdate(to, <span class="keyword">from</span>, next) &#123;</div><div class="line">    <span class="keyword">this</span>.getTheme(<span class="string">`/<span class="subst">$&#123;to.params.id&#125;</span>`</span>);</div><div class="line">    next();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
         
           <!-- 注释掉文章列表尾部的more -->
-          <!-- <a class="article-more-a" href="/2018/03/02/vue学习记录/#more">more >></a> -->
+          <!-- <a class="article-more-a" href="/2018/02/15/vue学习记录/#more">more >></a> -->
         
       
 
@@ -240,7 +246,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/02/vue学习记录/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/02/15/vue学习记录/">展开全文 >></a>
         </p>
       
 
@@ -804,11 +810,11 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -856,11 +862,11 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
               </li>
              
               <li class="article-tag-list-item">
