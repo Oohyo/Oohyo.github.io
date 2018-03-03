@@ -116,8 +116,8 @@
         var data = res.list[j].arr;
         var liTmpl = "";
         for (var i = 0, len = data.link.length; i < len; i++) {
-          var minSrc = 'https://er567.cn/ins-min/' + data.link[i] + '.min.jpg';
-          var src = 'https://er567.cn/ins/' + data.link[i];
+          var minSrc = 'https://er567.cn/blogPhoto/min_photos/' + data.link[i] + '.min.jpg';
+          var src = 'https://er567.cn/blogPhoto/photos/' + data.link[i];
           var type = data.type[i];
           var target = src + (type === 'video' ? '.mp4' : '.jpg');
           src += '.jpg';
