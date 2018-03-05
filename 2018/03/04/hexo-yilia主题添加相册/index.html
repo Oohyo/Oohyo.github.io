@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="oohyo.github.io">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <title>hexo yilia添加相册 | 静夜|blog</title>
+  <title>hexo yilia添加相册 | 静夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="最终效果：https://er567.cn/photos 
 参考连接：http://lawlite.me/ 
@@ -18,14 +18,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo yilia添加相册">
 <meta property="og:url" content="oohyo.github.io/2018/03/04/hexo-yilia主题添加相册/index.html">
-<meta property="og:site_name" content="静夜|blog">
+<meta property="og:site_name" content="静夜">
 <meta property="og:description" content="最终效果：https://er567.cn/photos 
 参考连接：http://lawlite.me/ 
 有什么问题可以在下面留言评论或者左边的联系方式问我
 下面大概说一下实现步骤
 1.创建图床你可以用你自己的服务器搭一个，也可以使用七牛云，最方便当然还是直接在git上建一个仓库用来存放图片，缺点就是一次性添加图片过多的时候上传会有点慢。
 2.压缩图片并整理图片信息这一步需要读取文件，你可以用">
-<meta property="og:updated_time" content="2018-03-05T01:12:19.067Z">
+<meta property="og:updated_time" content="2018-03-05T01:52:01.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo yilia添加相册">
 <meta name="twitter:description" content="最终效果：https://er567.cn/photos 
@@ -215,7 +215,12 @@
 <h3 id="2-压缩图片并整理图片信息"><a href="#2-压缩图片并整理图片信息" class="headerlink" title="2.压缩图片并整理图片信息"></a>2.压缩图片并整理图片信息</h3><p>这一步需要读取文件，你可以用nodejs,python,php等等都行。主题的作者是用的nodejs,我参考使用的是python。大概实现的功能就是读取原图，压缩图片，将原图和压缩过的图片的信息都整理好存到一个json文件中以便于hexo 主题模板渲染页面使用。</p>
 <h3 id="3-在blog目录中渲染相册页面"><a href="#3-在blog目录中渲染相册页面" class="headerlink" title="3.在blog目录中渲染相册页面"></a>3.在blog目录中渲染相册页面</h3><p>拿到了图片信息json文件后需要编辑相册页面模板，你也可以自定义一些样式。在source目录中创建photos文件夹，在里面编辑ejs,js,css</p>
 <h3 id="4-部署"><a href="#4-部署" class="headerlink" title="4.部署"></a>4.部署</h3><p>以上这些都弄完没问题之后就可以部署上去了(每次更新图片需要跑一下脚本更新json)<br><a id="more"></a></p>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>未完待续…</p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>在运行python脚本时候你可能会没有环境，简单，对照官网安装配置环境就好了。</p>
+<p>安装PIL =&gt; pip install Pillow //图像处理库 </p>
+<p>然后还遇到里字符编码问题，保存的json文件中无法存中文。</p>
+<p>因为Python2中默认的编码方式一般是GBK,需要在处理的中文字符串后.decode(‘gbk’) //将gbk编码的字符串转换成unicode编码</p>
+<p><strong>图片无法显示：</strong></p>
+<p>1.图片后缀是否保存正确<br>2.控制台查看引用的路径是否正确<br>3.图片是否已经成功上传到，并在仓库设置开启git pages</p>
 
       
 
@@ -562,6 +567,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -582,7 +591,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,14 +604,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">layui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">后台</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,11 +619,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">h5</a>
+                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,7 +627,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">h5</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -638,6 +643,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">css3</a>
               </li>
              
@@ -646,19 +655,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color1">layui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
+                <a href="javascript:void(0)" class="js-tag color3">后台</a>
               </li>
             
             <div class="clearfix"></div>
