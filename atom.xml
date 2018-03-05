@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="oohyo.github.io/"/>
-  <updated>2018-03-03T03:01:00.128Z</updated>
+  <updated>2018-03-05T01:12:19.067Z</updated>
   <id>oohyo.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo yilia添加相册</title>
+    <link href="oohyo.github.io/2018/03/04/hexo-yilia%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E7%9B%B8%E5%86%8C/"/>
+    <id>oohyo.github.io/2018/03/04/hexo-yilia主题添加相册/</id>
+    <published>2018-03-04T00:30:00.000Z</published>
+    <updated>2018-03-05T01:12:19.067Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>最终效果：</strong><a href="https://er567.cn/photos/" target="_blank" rel="external">https://er567.cn/photos</a> </p><p><strong>参考连接：</strong><a href="http://lawlite.me/2017/04/13/Hexo-Github实现相册功能/" target="_blank" rel="external">http://lawlite.me/</a> </p><p>有什么问题可以在下面留言评论或者左边的联系方式问我</p><p>下面大概说一下实现步骤</p><h3 id="1-创建图床"><a href="#1-创建图床" class="headerlink" title="1.创建图床"></a>1.创建图床</h3><p>你可以用你自己的服务器搭一个，也可以使用七牛云，最方便当然还是直接在git上建一个仓库用来存放图片，缺点就是一次性添加图片过多的时候上传会有点慢。</p><h3 id="2-压缩图片并整理图片信息"><a href="#2-压缩图片并整理图片信息" class="headerlink" title="2.压缩图片并整理图片信息"></a>2.压缩图片并整理图片信息</h3><p>这一步需要读取文件，你可以用nodejs,python,php等等都行。主题的作者是用的nodejs,我参考使用的是python。大概实现的功能就是读取原图，压缩图片，将原图和压缩过的图片的信息都整理好存到一个json文件中以便于hexo 主题模板渲染页面使用。</p><h3 id="3-在blog目录中渲染相册页面"><a href="#3-在blog目录中渲染相册页面" class="headerlink" title="3.在blog目录中渲染相册页面"></a>3.在blog目录中渲染相册页面</h3><p>拿到了图片信息json文件后需要编辑相册页面模板，你也可以自定义一些样式。在source目录中创建photos文件夹，在里面编辑ejs,js,css</p><h3 id="4-部署"><a href="#4-部署" class="headerlink" title="4.部署"></a>4.部署</h3><p>以上这些都弄完没问题之后就可以部署上去了(每次更新图片需要跑一下脚本更新json)<br><a id="more"></a></p><h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>未完待续…</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;最终效果：&lt;/strong&gt;&lt;a href=&quot;https://er567.cn/photos/&quot;&gt;https://er567.cn/photos&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参考连接：&lt;/strong&gt;&lt;a href=&quot;http://lawlite.me/2017/04/13/Hexo-Github实现相册功能/&quot;&gt;http://lawlite.me/&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;有什么问题可以在下面留言评论或者左边的联系方式问我&lt;/p&gt;
+&lt;p&gt;下面大概说一下实现步骤&lt;/p&gt;
+&lt;h3 id=&quot;1-创建图床&quot;&gt;&lt;a href=&quot;#1-创建图床&quot; class=&quot;headerlink&quot; title=&quot;1.创建图床&quot;&gt;&lt;/a&gt;1.创建图床&lt;/h3&gt;&lt;p&gt;你可以用你自己的服务器搭一个，也可以使用七牛云，最方便当然还是直接在git上建一个仓库用来存放图片，缺点就是一次性添加图片过多的时候上传会有点慢。&lt;/p&gt;
+&lt;h3 id=&quot;2-压缩图片并整理图片信息&quot;&gt;&lt;a href=&quot;#2-压缩图片并整理图片信息&quot; class=&quot;headerlink&quot; title=&quot;2.压缩图片并整理图片信息&quot;&gt;&lt;/a&gt;2.压缩图片并整理图片信息&lt;/h3&gt;&lt;p&gt;这一步需要读取文件，你可以用nodejs,python,php等等都行。主题的作者是用的nodejs,我参考使用的是python。大概实现的功能就是读取原图，压缩图片，将原图和压缩过的图片的信息都整理好存到一个json文件中以便于hexo 主题模板渲染页面使用。&lt;/p&gt;
+&lt;h3 id=&quot;3-在blog目录中渲染相册页面&quot;&gt;&lt;a href=&quot;#3-在blog目录中渲染相册页面&quot; class=&quot;headerlink&quot; title=&quot;3.在blog目录中渲染相册页面&quot;&gt;&lt;/a&gt;3.在blog目录中渲染相册页面&lt;/h3&gt;&lt;p&gt;拿到了图片信息json文件后需要编辑相册页面模板，你也可以自定义一些样式。在source目录中创建photos文件夹，在里面编辑ejs,js,css&lt;/p&gt;
+&lt;h3 id=&quot;4-部署&quot;&gt;&lt;a href=&quot;#4-部署&quot; class=&quot;headerlink&quot; title=&quot;4.部署&quot;&gt;&lt;/a&gt;4.部署&lt;/h3&gt;&lt;p&gt;以上这些都弄完没问题之后就可以部署上去了(每次更新图片需要跑一下脚本更新json)&lt;br&gt;
+    
+    </summary>
+    
+      <category term="折腾记录" scheme="oohyo.github.io/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="hexo" scheme="oohyo.github.io/tags/hexo/"/>
+    
+      <category term="yilia" scheme="oohyo.github.io/tags/yilia/"/>
+    
+      <category term="hexo主题" scheme="oohyo.github.io/tags/hexo%E4%B8%BB%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>vue学习记录</title>
@@ -138,9 +171,9 @@
     <link href="oohyo.github.io/2018/01/01/2017%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
     <id>oohyo.github.io/2018/01/01/2017年度总结/</id>
     <published>2017-12-31T23:59:00.000Z</published>
-    <updated>2018-01-22T02:06:18.786Z</updated>
+    <updated>2018-03-05T01:14:12.929Z</updated>
     
-    <content type="html"><![CDATA[<p>不知不觉2017就过完了，大概回顾一下吧：</p><p>年前<strong>一月</strong>份还在学校里面消磨着最后的学校时光，虽然周围人是越来越少了但好歹还是有一些的，大体活动也就是吃饭、开黑、跑步、跑得快了。那会年底工作并不是很好找，好歹运气还行，面试了一个算是拿到offer了。</p><p><strong>二月</strong>份中便入职了，先是当了MT(你好，我叫MT…)这期间认识了很多小伙伴，妈耶还第一次穿了西装皮鞋，想想也算是洗脑一波。</p><p>然后<strong>三月份</strong>就进入到了轨道，开始了正式的工作以及学习。刚开始对于模块化开发、requirejs、单例模式、MVC/MVVM框架都挺陌生，但后来接触熟悉之后发现也就这样，不过倒是发现前端的分支是真的多，以后还有很长的路要走…</p><p>到了<strong>六七月</strong>份忙着毕业设计和答辩，原以为还得认真准备的还特地请了半个月的假，结果也就是走了个过场，不过总算是顺利毕业。毕业之后便和佛在西门租了个两室一厅过起了潇洒的日子，刚开始不觉得，现在想想还是有点想念那时候。翻了下相册，七月还和同事一起去了趟娄底湄江旅游，山水非常nice；<br><img src="https://t1.aixinxi.net/o_1c4dp9kvqgekpe12vcu3j1dn3a.jpg-w.jpg" alt="湄江"><br><a id="more"></a><br>七月在同事的氛围和自己的想法下，和佛商量一起去领了皮皮(3个月三花小母猫)。<br><img src="https://t1.aixinxi.net/o_1c4dp7ln21pkc1nn71m30123q15vua.png-w.jpg" alt="皮皮3个月"><img src="https://t1.aixinxi.net/o_1c4dpa1co1d79hmou6aifqv35a.png-w.jpg" alt="皮皮8个月"><br>再后来<strong>十月</strong>佛走了，去了深圳，而我也就开始了群居生活。其中一些枝末细节已经记不得了，只知道他们真的和皮皮生活在一起的时候才觉得它是个累赘，开始我并不觉得，到现在我也依然不觉得，虽然它确实很调皮，但只觉得有点费钱罢了，这并不怪它，怪只怪我挣得确实不多。</p><p>再到现在<strong>十二月</strong>过完，回头想想一幕幕放佛还是昨天，一路过来也没什么计划，这一年看了很多博客才知道许多人年初都会有大体计划然后再细化到每个季度每个月，这些东西就算是朋友也未必会和你说，但他们写在博客里大多都只是为了给自己一个记录吧，就像我也是一样。</p><p>接着再分类总结一下，规划规划明年吧。</p>]]></content>
+    <content type="html"><![CDATA[<p>不知不觉2017就过完了，大概回顾一下吧：</p><p>年前<strong>一月</strong>份还在学校里面消磨着最后的学校时光，虽然周围人是越来越少了但好歹还是有一些的，大体活动也就是吃饭、开黑、跑步、跑得快了。那会年底工作并不是很好找，好歹运气还行，面试了一个算是拿到offer了。</p><p><strong>二月</strong>份中便入职了，先是当了MT(你好，我叫MT…)这期间认识了很多小伙伴，妈耶还第一次穿了西装皮鞋，想想也算是洗脑一波。</p><p>然后<strong>三月份</strong>就进入到了轨道，开始了正式的工作以及学习。刚开始对于模块化开发、requirejs、单例模式、MVC/MVVM框架都挺陌生，但后来接触熟悉之后发现也就这样，不过倒是发现前端的分支是真的多，以后还有很长的路要走…</p><p>到了<strong>六七月</strong>份忙着毕业设计和答辩，原以为还得认真准备的还特地请了半个月的假，结果也就是走了个过场，不过总算是顺利毕业。毕业之后便和佛在西门租了个两室一厅过起了潇洒的日子，刚开始不觉得，现在想想还是有点想念那时候。翻了下相册，七月还和同事一起去了趟娄底湄江旅游，山水非常nice；<br><img src="https://t1.aixinxi.net/o_1c4dp9kvqgekpe12vcu3j1dn3a.jpg-w.jpg" alt="湄江"><br><a id="more"></a><br>七月在同事的氛围和自己的想法下，和佛商量一起去领了皮皮(3个月三花小母猫)。<br><img src="https://t1.aixinxi.net/o_1c4dp7ln21pkc1nn71m30123q15vua.png-w.jpg" alt="皮皮3个月"><img src="https://t1.aixinxi.net/o_1c4dpa1co1d79hmou6aifqv35a.png-w.jpg" alt="皮皮8个月"><br>再后来<strong>十月</strong>佛走了，去了深圳，而我也就开始了群居生活。其中一些枝末细节已经记不得了，只知道他们真的和皮皮生活在一起的时候才觉得它是个累赘，开始我并不觉得，到现在我也依然不觉得，虽然它确实很调皮，但只觉得有点费钱罢了，这并不怪它，怪只怪我挣得确实不多。</p><p>再到现在<strong>十二月</strong>过完，回头想想一幕幕放佛还是昨天，一路过来也没什么计划，这一年看了很多博客才知道许多人年初都会有大体计划然后再细化到每个季度每个月，这些东西就算是朋友也未必会和你说，但他们写在博客里大多都只是为了给自己一个记录吧，就像我也是一样。</p><p>接着再分类总结一下，规划规划明年吧。</p><p>技术方面玩熟vue/webpack，熟悉node express/docker<br>书籍完整的看完5本<br>生活方面去旅游一次吧 女朋友什么的随缘吧<br>控制体重，瘦个十斤应该不难(●ˇ∀ˇ●) </p>]]></content>
     
     <summary type="html">
     
@@ -578,35 +611,6 @@
     
     
       <category term="学习笔记" scheme="oohyo.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>皮皮虾,我们走</title>
-    <link href="oohyo.github.io/2017/02/28/%E7%9A%AE%E7%9A%AE%E8%99%BE-%E6%88%91%E4%BB%AC%E8%B5%B0/"/>
-    <id>oohyo.github.io/2017/02/28/皮皮虾-我们走/</id>
-    <published>2017-02-27T23:34:37.000Z</published>
-    <updated>2017-12-11T10:14:54.855Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://om1a60efb.bkt.clouddn.com/duorou_0.png" alt="duorou"></p><h2 id="曾经的多肉"><a href="#曾经的多肉" class="headerlink" title="曾经的多肉"></a>曾经的多肉</h2><ul><li>黄金万年草</li><li>小黄花-照波</li><li>红宝石 </li><li>吉娃娃 </li><li>小雪莲 </li></ul><a id="more"></a><ul><li>姬玉露</li><li>观音莲</li><li>桃蛋</li><li>白熊童子</li></ul><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p>在这半年里,学会了很多关于养护植物的知识,觉得这些小植物也挺有意思的,虽然跑来跑去拿快递有点麻烦…</p><ul><li>邮件(zgc7788#gmail.com, 把#换成@)</li><li>QQ: 839153198</li><li>weibo: <a href="http://weibo.com/er567" target="_blank" rel="external">@er_567</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://om1a60efb.bkt.clouddn.com/duorou_0.png&quot; alt=&quot;duorou&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;曾经的多肉&quot;&gt;&lt;a href=&quot;#曾经的多肉&quot; class=&quot;headerlink&quot; title=&quot;曾经的多肉&quot;&gt;&lt;/a&gt;曾经的多肉&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;黄金万年草&lt;/li&gt;
-&lt;li&gt;小黄花-照波&lt;/li&gt;
-&lt;li&gt;红宝石 &lt;/li&gt;
-&lt;li&gt;吉娃娃 &lt;/li&gt;
-&lt;li&gt;小雪莲 &lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="多肉" scheme="oohyo.github.io/categories/%E5%A4%9A%E8%82%89/"/>
-    
-    
-      <category term="随笔" scheme="oohyo.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   

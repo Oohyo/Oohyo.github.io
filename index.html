@@ -173,6 +173,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-hexo-yilia主题添加相册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/04/hexo-yilia主题添加相册/">hexo yilia添加相册</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/04/hexo-yilia主题添加相册/" class="archive-article-date">
+  	<time datetime="2018-03-04T00:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>最终效果：</strong><a href="https://er567.cn/photos/">https://er567.cn/photos</a> </p>
+<p><strong>参考连接：</strong><a href="http://lawlite.me/2017/04/13/Hexo-Github实现相册功能/">http://lawlite.me/</a> </p>
+<p>有什么问题可以在下面留言评论或者左边的联系方式问我</p>
+<p>下面大概说一下实现步骤</p>
+<h3 id="1-创建图床"><a href="#1-创建图床" class="headerlink" title="1.创建图床"></a>1.创建图床</h3><p>你可以用你自己的服务器搭一个，也可以使用七牛云，最方便当然还是直接在git上建一个仓库用来存放图片，缺点就是一次性添加图片过多的时候上传会有点慢。</p>
+<h3 id="2-压缩图片并整理图片信息"><a href="#2-压缩图片并整理图片信息" class="headerlink" title="2.压缩图片并整理图片信息"></a>2.压缩图片并整理图片信息</h3><p>这一步需要读取文件，你可以用nodejs,python,php等等都行。主题的作者是用的nodejs,我参考使用的是python。大概实现的功能就是读取原图，压缩图片，将原图和压缩过的图片的信息都整理好存到一个json文件中以便于hexo 主题模板渲染页面使用。</p>
+<h3 id="3-在blog目录中渲染相册页面"><a href="#3-在blog目录中渲染相册页面" class="headerlink" title="3.在blog目录中渲染相册页面"></a>3.在blog目录中渲染相册页面</h3><p>拿到了图片信息json文件后需要编辑相册页面模板，你也可以自定义一些样式。在source目录中创建photos文件夹，在里面编辑ejs,js,css</p>
+<h3 id="4-部署"><a href="#4-部署" class="headerlink" title="4.部署"></a>4.部署</h3><p>以上这些都弄完没问题之后就可以部署上去了(每次更新图片需要跑一下脚本更新json)<br>
+        
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2018/03/04/hexo-yilia主题添加相册/#more">more >></a> -->
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hexo主题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/折腾记录/" class="article-tag-list-link color5">折腾记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/04/hexo-yilia主题添加相册/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-vue学习记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -546,90 +638,9 @@ onLoad: function (options) {
 
 
   
-    <article id="post-2017年度总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/2017年度总结/">2017年度总结</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/01/2017年度总结/" class="archive-article-date">
-  	<time datetime="2017-12-31T23:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>不知不觉2017就过完了，大概回顾一下吧：</p>
-<p>年前<strong>一月</strong>份还在学校里面消磨着最后的学校时光，虽然周围人是越来越少了但好歹还是有一些的，大体活动也就是吃饭、开黑、跑步、跑得快了。那会年底工作并不是很好找，好歹运气还行，面试了一个算是拿到offer了。</p>
-<p><strong>二月</strong>份中便入职了，先是当了MT(你好，我叫MT…)这期间认识了很多小伙伴，妈耶还第一次穿了西装皮鞋，想想也算是洗脑一波。</p>
-<p>然后<strong>三月份</strong>就进入到了轨道，开始了正式的工作以及学习。刚开始对于模块化开发、requirejs、单例模式、MVC/MVVM框架都挺陌生，但后来接触熟悉之后发现也就这样，不过倒是发现前端的分支是真的多，以后还有很长的路要走…</p>
-<p>到了<strong>六七月</strong>份忙着毕业设计和答辩，原以为还得认真准备的还特地请了半个月的假，结果也就是走了个过场，不过总算是顺利毕业。毕业之后便和佛在西门租了个两室一厅过起了潇洒的日子，刚开始不觉得，现在想想还是有点想念那时候。翻了下相册，七月还和同事一起去了趟娄底湄江旅游，山水非常nice；<br><img src="https://t1.aixinxi.net/o_1c4dp9kvqgekpe12vcu3j1dn3a.jpg-w.jpg" alt="湄江"><br>
-        
-          <!-- 注释掉文章列表尾部的more -->
-          <!-- <a class="article-more-a" href="/2018/01/01/2017年度总结/#more">more >></a> -->
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">年度总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔/" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/01/2017年度总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -802,10 +813,6 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
@@ -814,11 +821,7 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -834,6 +837,30 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">layui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">后台</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
@@ -846,22 +873,6 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">layui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">后台</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
@@ -870,7 +881,11 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -882,11 +897,15 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">css3</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+                <a href="javascript:void(0)" class="js-tag color3">动画</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -894,11 +913,11 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">css3</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">动画</a>
+                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
               </li>
             
             <div class="clearfix"></div>
