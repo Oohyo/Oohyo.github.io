@@ -309,11 +309,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -570,7 +570,8 @@ onLoad: function (options) {
 <li><p>[参考链接]<a href="http://blog.csdn.net/majun0007/article/details/70049070" target="_blank" rel="external">http://blog.csdn.net/majun0007/article/details/70049070</a></p>
 </li>
 </ul>
-<h3 id="四丶遇到的坑"><a href="#四丶遇到的坑" class="headerlink" title="四丶遇到的坑"></a>四丶遇到的坑</h3><ul>
+<h3 id="四丶RequestAnimationFrame"><a href="#四丶RequestAnimationFrame" class="headerlink" title="四丶RequestAnimationFrame"></a>四丶RequestAnimationFrame</h3><p>如果你需要细化过渡效果，但是使用setTimeout可能在性能不够的手机上还是会出现卡顿的情况，我就遇到了这样的情况。 setTimeout会存在过度绘制，会造成帧丢失，继而导致动画断续显示。这也是setTimeout的定时器值推荐最小使用16.7ms的原因（16.7 = 1000 / 60, 即每秒60帧）。而requestAnimationFrame是跟着浏览器绘制来的，不会存在过度绘制，也就不会出现动画卡顿的情况。<br><a href="https://segmentfault.com/a/1190000008246652" target="_blank" rel="external">参考链接</a><a href="https://github.com/er567/demo/tree/master/requestAnimationFrame" target="_blank" rel="external">代码</a></p>
+<h3 id="五丶遇到的坑"><a href="#五丶遇到的坑" class="headerlink" title="五丶遇到的坑"></a>五丶遇到的坑</h3><ul>
 <li><p>元素display:none的时候是拿不到transform的值（其他属性没试），解决办法：用visibility: hidden;</p>
 </li>
 <li><p>过渡动画的时候，先让元素display:block 马上执行css3动画，结果浏览器直接忽略过渡动画，渲染最后的结果。</p>
@@ -813,23 +814,7 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,11 +830,19 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -869,23 +862,11 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Mint Ui</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -905,11 +886,23 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mint Ui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -918,6 +911,14 @@ onLoad: function (options) {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动画</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
             
             <div class="clearfix"></div>
