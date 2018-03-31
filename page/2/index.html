@@ -179,6 +179,91 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-别改变浏览器访问历史记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/31/别改变浏览器访问历史记录/">不要随便监听改变浏览记录！</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/31/别改变浏览器访问历史记录/" class="archive-article-date">
+  	<time datetime="2018-01-30T19:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在项目中遇到的坑，已填平=-=<br>以后还是尽量别手动强跳页面打乱浏览器访问记录，尽量用原生的返回，性能体验比较好(返回后有缓存除外。</p>
+<h3 id="监听浏览器返回事件"><a href="#监听浏览器返回事件" class="headerlink" title="监听浏览器返回事件"></a>监听浏览器返回事件</h3> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.history.pushState(<span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);<span class="comment">//兼容</span></div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"popstate"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="comment">//do something  </span></div><div class="line">&#125;,<span class="literal">false</span>);</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>ios8会有bug，页面加载的时候会直接执行监听的内容。</p>
+<p><strong>原因：</strong>浏览器版本，导致进页面就默认触发了popstate，导致了代码段执行，可以用下面的代码解决。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">params</span>:&#123;<span class="attr">isRun</span>: <span class="literal">false</span>&#125;,</div><div class="line">    <span class="attr">backTo</span>:&#123;</div><div class="line">        <span class="comment">//图一代码段</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">initBack</span>:&#123;</div><div class="line">       <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line">       self.param.isRun = <span class="literal">false</span>;  </div><div class="line">       setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; self.param.isRun = <span class="literal">true</span>; &#125;, <span class="number">1000</span>); <span class="comment">//延迟1秒 防止微信返回立即执行popstate事件  </span></div><div class="line">       self.backTo();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="浏览器缓存问题"><a href="#浏览器缓存问题" class="headerlink" title="浏览器缓存问题"></a>浏览器缓存问题</h3><p>1.如是跳转页面 可以加时间戳<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//调用</span></div><div class="line">timestamp(getReferrer())</div></pre></td></tr></table></figure></p>
+        
+          <!-- 注释掉文章列表尾部的more -->
+          <!-- <a class="article-more-a" href="/2018/01/31/别改变浏览器访问历史记录/#more">more >></a> -->
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小程序</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">h5</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/学习笔记/" class="article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/31/别改变浏览器访问历史记录/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-小程序内嵌h5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -545,85 +630,6 @@ onLoad: function (options) {
 
 
   
-    <article id="post-VScode终端乱码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/29/VScode终端乱码/">解决 Windows 下 VSCode 运行 Python 程序的中文乱码问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/29/VScode终端乱码/" class="archive-article-date">
-  	<time datetime="2017-11-28T18:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>Windows 下的 cmd 和 powershell 默认是 GBK 编码显示输出内容， 这导致使用 UTF-8 的 Python 程序中的中文内容（包括注释、文档、和字符串字面量）会以不正确的解码方式输出成乱码内容。</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>Windows 内置了一个叫 “chcp” 的命令，它可以修改要显示的字符集编码的编号。UTF-8 的编号是 65001，所以启动 cmd 或者 powershell 以后可以手动输入：chcp 65001来改变编码。 </p>
-<p>启动 powershell 的时候带上修改编码的参数: “chcp.com 65001” 即可做到自动设置编码。设置如下:<br>
-        
-          <!-- 注释掉文章列表尾部的more -->
-          <!-- <a class="article-more-a" href="/2017/11/29/VScode终端乱码/#more">more >></a> -->
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/学习笔记/" class="article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/29/VScode终端乱码/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -808,10 +814,6 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -848,6 +850,10 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -856,7 +862,7 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -864,11 +870,11 @@ onLoad: function (options) {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">Mint Ui</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Mint Ui</a>
+                <a href="javascript:void(0)" class="js-tag color3">WebPack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -913,6 +919,18 @@ onLoad: function (options) {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">template</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">定时任务</a>
               </li>
             
             <div class="clearfix"></div>
