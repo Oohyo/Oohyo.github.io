@@ -66,9 +66,9 @@
     
       <category term="css" scheme="oohyo.github.io/tags/css/"/>
     
-      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
-    
       <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
     
       <category term="浏览器" scheme="oohyo.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
@@ -132,9 +132,9 @@
       <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
-    
       <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
     
       <category term="Mint Ui" scheme="oohyo.github.io/tags/Mint-Ui/"/>
     
@@ -562,9 +562,9 @@
       <category term="WebPack" scheme="oohyo.github.io/categories/WebPack/"/>
     
     
-      <category term="js" scheme="oohyo.github.io/tags/js/"/>
-    
       <category term="WebPack" scheme="oohyo.github.io/tags/WebPack/"/>
+    
+      <category term="js" scheme="oohyo.github.io/tags/js/"/>
     
   </entry>
   
