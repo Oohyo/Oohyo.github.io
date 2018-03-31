@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="oohyo.github.io/"/>
-  <updated>2018-03-17T09:08:34.699Z</updated>
+  <updated>2018-03-31T08:40:41.545Z</updated>
   <id>oohyo.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>黑色星期五-环境爆炸</title>
+    <link href="oohyo.github.io/2018/03/31/%E7%8E%AF%E5%A2%83%E7%88%86%E7%82%B8/"/>
+    <id>oohyo.github.io/2018/03/31/环境爆炸/</id>
+    <published>2018-03-30T23:59:59.000Z</published>
+    <updated>2018-03-31T08:40:41.545Z</updated>
+    
+    <content type="html"><![CDATA[<p>环境爆炸了,原因疑似npm install哪个依赖包出了问题,导致webpack resolve alias不生效了,报错信息如下<br><img src="https://t1.aixinxi.net/o_1c9tj2ri4ib0qve1d1qnhrlh6a.png-j.jpg" alt="bug"><br><a id="more"></a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;环境爆炸了,原因疑似npm install哪个依赖包出了问题,导致webpack resolve alias不生效了,报错信息如下&lt;br&gt;&lt;img src=&quot;https://t1.aixinxi.net/o_1c9tj2ri4ib0qve1d1qnhrlh6a.png-j.jpg&quot; alt=&quot;bug&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
+    
+      <category term="小程序" scheme="oohyo.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+      <category term="项目环境" scheme="oohyo.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
   
   <entry>
     <title>常见基础&amp;原理问题记录</title>
@@ -425,9 +451,9 @@
     
       <category term="css" scheme="oohyo.github.io/tags/css/"/>
     
-      <category term="兼容性" scheme="oohyo.github.io/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
-    
       <category term="布局" scheme="oohyo.github.io/tags/%E5%B8%83%E5%B1%80/"/>
+    
+      <category term="兼容性" scheme="oohyo.github.io/tags/%E5%85%BC%E5%AE%B9%E6%80%A7/"/>
     
   </entry>
   
@@ -593,31 +619,6 @@
       <category term="js" scheme="oohyo.github.io/tags/js/"/>
     
       <category term="移动端" scheme="oohyo.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前后端联调</title>
-    <link href="oohyo.github.io/2017/03/09/%E5%89%8D%E5%90%8E%E7%AB%AF%E8%81%94%E8%B0%83/"/>
-    <id>oohyo.github.io/2017/03/09/前后端联调/</id>
-    <published>2017-03-09T01:46:00.000Z</published>
-    <updated>2017-12-11T10:14:44.825Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://om1a60efb.bkt.clouddn.com/image/meixi-lake.jpg?imageView2/2/h/300" alt="meixi"></p><h3 id="Task-One-修改links"><a href="#Task-One-修改links" class="headerlink" title="Task One:修改links"></a>Task One:修改links</h3><p>&emsp;&emsp;首先是调链接,将原来的项目clone下来,替换掉部分链接… 看似十分简单的任务,但是我却也GG了几次~MMP,先是链接没有完全改完,漏掉了js文件里的几个没有改,但是这并不重要,重要的是根本就没有发布 - -//<br>&emsp;&emsp;最后,经过一顿折终于是发布到了测试环境上让java老哥跑了起来~<br><a id="more"></a></p><h3 id="Task-Two-添加dom元素"><a href="#Task-Two-添加dom元素" class="headerlink" title="Task Two:添加dom元素"></a>Task Two:添加dom元素</h3><p>&emsp;&emsp;嗨呀,改这个并没有什么难度..但还是遇到了几个问题,比如在没有服务器环境的情况下如何看到修改后页面的效果,mootools和jq的冲突啊,等等…<br><strong>调试问题是用Fiddler解决的,具体方法:</strong><br>1.用Fiddler查看页面的数据流列表，找到这个需要修改文件的session<br>2.将文件保存到本地<br>3.开启Fiddler的请求自动重定向功能<br>4.创建重定向规则，将目标是这个文件网上url请求重定向到本地文件<br>5.修改本地文件，进行测试</p><p><strong>冲突问题用jQuery.noConflict()</strong><br>1.原因是mootools或其他js插件库的$起了冲突<br>2.先引用jq,然后插入 <strong>var jq = jQuery.noConflict()</strong> 之后再引用mootools或其他js插件库;还有要注意的就是如果你还要使用jq的插件的话,记得手动把插件里的$符都改成jq !!! 使用编辑器的快捷键1S就搞定了,这里就不多提了~<br>3.用jq操作dom的时候和平时用一样,只不过将$换成jq罢了</p><h3 id="面临的问题"><a href="#面临的问题" class="headerlink" title="面临的问题"></a>面临的问题</h3><ul><li>获取数据是不是也要用mootools模版</li><li>省市区控件(到底是否可以引入JQ),dom操作能不能用jq</li><li>接口格式不知道..java老哥说和之前的不一样</li><li><a href="http://fis.baidu.com/fis3/docs/node-mock.html" target="_blank" rel="external">mock数据</a>具体操作</li><li>怎么模拟接口数据让fiddler抓取</li></ul><hr><p><strong>最后，由于本人还是前端路上的小菜鸟，见识有限，才疏学浅，有表述错误的地方，还请指正，以上。</strong></p><h4 id="附参考资料："><a href="#附参考资料：" class="headerlink" title="附参考资料："></a>附参考资料：</h4><p><a href="http://fis.baidu.com/fis3/docs/node-mock.html" target="_blank" rel="external">Mock 假数据模拟</a><br><a href="http://www.frontopen.com/911.html" target="_blank" rel="external">冲突的解决办法</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://om1a60efb.bkt.clouddn.com/image/meixi-lake.jpg?imageView2/2/h/300&quot; alt=&quot;meixi&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Task-One-修改links&quot;&gt;&lt;a href=&quot;#Task-One-修改links&quot; class=&quot;headerlink&quot; title=&quot;Task One:修改links&quot;&gt;&lt;/a&gt;Task One:修改links&lt;/h3&gt;&lt;p&gt;&amp;emsp;&amp;emsp;首先是调链接,将原来的项目clone下来,替换掉部分链接… 看似十分简单的任务,但是我却也GG了几次~MMP,先是链接没有完全改完,漏掉了js文件里的几个没有改,但是这并不重要,重要的是根本就没有发布 - -//&lt;br&gt;&amp;emsp;&amp;emsp;最后,经过一顿折终于是发布到了测试环境上让java老哥跑了起来~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="实习日记" scheme="oohyo.github.io/categories/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
-    
-    
-      <category term="Mootools" scheme="oohyo.github.io/tags/Mootools/"/>
-    
-      <category term="联调" scheme="oohyo.github.io/tags/%E8%81%94%E8%B0%83/"/>
     
   </entry>
   
