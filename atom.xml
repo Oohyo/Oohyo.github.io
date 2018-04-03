@@ -47,20 +47,17 @@
     <link href="oohyo.github.io/2018/03/29/Linux_1/"/>
     <id>oohyo.github.io/2018/03/29/Linux_1/</id>
     <published>2018-03-28T22:00:00.000Z</published>
-    <updated>2018-03-31T09:25:37.906Z</updated>
+    <updated>2018-04-03T09:32:56.838Z</updated>
     
-    <content type="html"><![CDATA[<ol><li><p>linux下安装git环境</p><p>yum -y install git</p></li><li><p>给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”</p><p>cd ~/.ssh/<br>cat id_rsa.pub   //将密钥复制添加到你的git账户</p></li><li><p>clone项目,安装依赖</p></li><li><p>写python脚本(路径要写绝对路径)</p></li><li><p>添加定时任务(crontab命令)</p></li><li><p>执行crond</p></li></ol><blockquote><p>在执行crond 时提示cron: can’t lock /var/run/crond.pid, otherpid may be 2699: Resource temporarily unavailable;<br>解决方案 rm -rf /var/run/crond.pid<br>重启即可 /etc/init.d/crond restart   </p></blockquote>]]></content>
+    <content type="html"><![CDATA[<p>起因,想在服务器启一个定时任务,每天晚上9点自动去github上拉取最新的代码,然后vue-build编译,想试试水,弄了一下还是踩了蛮多坑的TAT</p><p><strong>1.linux下安装git环境</strong></p><pre><code>yum -y install git</code></pre><p><strong>2.给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”</strong></p><pre><code>cd ~/.ssh/cat id_rsa.pub   //将密钥复制添加到你的git账户</code></pre><p><strong>3.clone项目,安装依赖</strong></p><p><strong>4.写python脚本(路径要写绝对路径)</strong></p><p><strong>5.添加定时任务(crontab命令)</strong></p><p><strong>6.执行crond</strong>  </p><h3 id="遇到的一些问题"><a href="#遇到的一些问题" class="headerlink" title="遇到的一些问题"></a>遇到的一些问题</h3><h4 id="1-crontab添加了定时任务之后没有crond-start启动"><a href="#1-crontab添加了定时任务之后没有crond-start启动" class="headerlink" title="1.crontab添加了定时任务之后没有crond start启动"></a>1.crontab添加了定时任务之后没有crond start启动</h4><p>  /sbin/service crond start //启动服务<br>  /sbin/service crond stop //关闭服务<br>  /sbin/service crond restart //重启服务<br>  /sbin/service crond reload //重新载入配置<br>  /sbin/service crond status //查看状态</p><blockquote><p>在执行crond 时提示cron: can’t lock /var/run/crond.pid, otherpid may be 2699: Resource temporarily unavailable;<br>解决方案 rm -rf /var/run/crond.pid<br>重启即可 /etc/init.d/crond restart </p></blockquote><h4 id="2-在定时任务跑python脚本没有环境变量"><a href="#2-在定时任务跑python脚本没有环境变量" class="headerlink" title="2.在定时任务跑python脚本没有环境变量"></a>2.在定时任务跑python脚本没有环境变量</h4><p>搜索了一下,采用shell脚本来执行..</p><h4 id="3-关于shell脚本"><a href="#3-关于shell脚本" class="headerlink" title="3.关于shell脚本"></a>3.关于shell脚本</h4><p>注意要写成绝对路径;注意.sh文件的文件格式(我在window下编辑好上传了一个shell脚本,然后运行报错了,最后发现是文件格式的问题)<br>可以使用:set ff=unix转换文件格式.</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;linux下安装git环境&lt;/p&gt;
-&lt;p&gt;yum -y install git&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”&lt;/p&gt;
-&lt;p&gt;cd ~/.ssh/&lt;br&gt;cat 
+        &lt;p&gt;起因,想在服务器启一个定时任务,每天晚上9点自动去github上拉取最新的代码,然后vue-build编译,想试试水,弄了一下还是踩了蛮多坑的TAT&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.linux下安装git环境&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;yum -y 
       
     
     </summary>
@@ -100,9 +97,9 @@
     
       <category term="css" scheme="oohyo.github.io/tags/css/"/>
     
-      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
-    
       <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
     
       <category term="浏览器" scheme="oohyo.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
@@ -166,9 +163,9 @@
       <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
-    
       <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
     
       <category term="Mint Ui" scheme="oohyo.github.io/tags/Mint-Ui/"/>
     
@@ -596,9 +593,9 @@
       <category term="WebPack" scheme="oohyo.github.io/categories/WebPack/"/>
     
     
-      <category term="js" scheme="oohyo.github.io/tags/js/"/>
-    
       <category term="WebPack" scheme="oohyo.github.io/tags/WebPack/"/>
+    
+      <category term="js" scheme="oohyo.github.io/tags/js/"/>
     
   </entry>
   

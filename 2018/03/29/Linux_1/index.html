@@ -9,64 +9,31 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <title>Linux折腾记录(一) | 静夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="linux下安装git环境
+  <meta name="description" content="起因,想在服务器启一个定时任务,每天晚上9点自动去github上拉取最新的代码,然后vue-build编译,想试试水,弄了一下还是踩了蛮多坑的TAT
+1.linux下安装git环境
 yum -y install git
-
-给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”
-cd ~/.ssh/cat id_rsa.pub   //将密钥复制添加到你的git账户
-
-clone项目,安装依赖
-
-写python脚本(路径要写绝对路径)
-
-添加定时任务(crontab命令)
-
-执行crond
-
-
-
-在执行crond">
+2.给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”
+cd ~/.ssh/
+cat id_rsa.pub   //将密钥复制添加到你的gi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux折腾记录(一)">
 <meta property="og:url" content="oohyo.github.io/2018/03/29/Linux_1/index.html">
 <meta property="og:site_name" content="静夜">
-<meta property="og:description" content="linux下安装git环境
+<meta property="og:description" content="起因,想在服务器启一个定时任务,每天晚上9点自动去github上拉取最新的代码,然后vue-build编译,想试试水,弄了一下还是踩了蛮多坑的TAT
+1.linux下安装git环境
 yum -y install git
-
-给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”
-cd ~/.ssh/cat id_rsa.pub   //将密钥复制添加到你的git账户
-
-clone项目,安装依赖
-
-写python脚本(路径要写绝对路径)
-
-添加定时任务(crontab命令)
-
-执行crond
-
-
-
-在执行crond">
-<meta property="og:updated_time" content="2018-03-31T09:25:37.906Z">
+2.给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”
+cd ~/.ssh/
+cat id_rsa.pub   //将密钥复制添加到你的gi">
+<meta property="og:updated_time" content="2018-04-03T09:32:56.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux折腾记录(一)">
-<meta name="twitter:description" content="linux下安装git环境
+<meta name="twitter:description" content="起因,想在服务器启一个定时任务,每天晚上9点自动去github上拉取最新的代码,然后vue-build编译,想试试水,弄了一下还是踩了蛮多坑的TAT
+1.linux下安装git环境
 yum -y install git
-
-给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”
-cd ~/.ssh/cat id_rsa.pub   //将密钥复制添加到你的git账户
-
-clone项目,安装依赖
-
-写python脚本(路径要写绝对路径)
-
-添加定时任务(crontab命令)
-
-执行crond
-
-
-
-在执行crond">
+2.给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”
+cd ~/.ssh/
+cat id_rsa.pub   //将密钥复制添加到你的gi">
   
   
     <link rel="icon" href="/favicon.png">
@@ -246,25 +213,22 @@ clone项目,安装依赖
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li><p>linux下安装git环境</p>
-<p>yum -y install git</p>
-</li>
-<li><p>给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”</p>
-<p>cd ~/.ssh/<br>cat id_rsa.pub   //将密钥复制添加到你的git账户</p>
-</li>
-<li><p>clone项目,安装依赖</p>
-</li>
-<li><p>写python脚本(路径要写绝对路径)</p>
-</li>
-<li><p>添加定时任务(crontab命令)</p>
-</li>
-<li><p>执行crond</p>
-</li>
-</ol>
+        <p>起因,想在服务器启一个定时任务,每天晚上9点自动去github上拉取最新的代码,然后vue-build编译,想试试水,弄了一下还是踩了蛮多坑的TAT</p>
+<p><strong>1.linux下安装git环境</strong></p>
+<pre><code>yum -y install git
+</code></pre><p><strong>2.给git账户配置密钥 //生成密钥:ssh-keygen -t rsa -C “邮箱地址”</strong></p>
+<pre><code>cd ~/.ssh/
+cat id_rsa.pub   //将密钥复制添加到你的git账户
+</code></pre><p><strong>3.clone项目,安装依赖</strong></p>
+<p><strong>4.写python脚本(路径要写绝对路径)</strong></p>
+<p><strong>5.添加定时任务(crontab命令)</strong></p>
+<p><strong>6.执行crond</strong>  </p>
+<h3 id="遇到的一些问题"><a href="#遇到的一些问题" class="headerlink" title="遇到的一些问题"></a>遇到的一些问题</h3><h4 id="1-crontab添加了定时任务之后没有crond-start启动"><a href="#1-crontab添加了定时任务之后没有crond-start启动" class="headerlink" title="1.crontab添加了定时任务之后没有crond start启动"></a>1.crontab添加了定时任务之后没有crond start启动</h4><p>  /sbin/service crond start //启动服务<br>  /sbin/service crond stop //关闭服务<br>  /sbin/service crond restart //重启服务<br>  /sbin/service crond reload //重新载入配置<br>  /sbin/service crond status //查看状态</p>
 <blockquote>
-<p>在执行crond 时提示cron: can’t lock /var/run/crond.pid, otherpid may be 2699: Resource temporarily unavailable;<br>解决方案 rm -rf /var/run/crond.pid<br>重启即可 /etc/init.d/crond restart   </p>
+<p>在执行crond 时提示cron: can’t lock /var/run/crond.pid, otherpid may be 2699: Resource temporarily unavailable;<br>解决方案 rm -rf /var/run/crond.pid<br>重启即可 /etc/init.d/crond restart </p>
 </blockquote>
+<h4 id="2-在定时任务跑python脚本没有环境变量"><a href="#2-在定时任务跑python脚本没有环境变量" class="headerlink" title="2.在定时任务跑python脚本没有环境变量"></a>2.在定时任务跑python脚本没有环境变量</h4><p>搜索了一下,采用shell脚本来执行..</p>
+<h4 id="3-关于shell脚本"><a href="#3-关于shell脚本" class="headerlink" title="3.关于shell脚本"></a>3.关于shell脚本</h4><p>注意要写成绝对路径;注意.sh文件的文件格式(我在window下编辑好上传了一个shell脚本,然后运行报错了,最后发现是文件格式的问题)<br>可以使用:set ff=unix转换文件格式.</p>
 
       
 
@@ -609,26 +573,6 @@ clone项目,安装依赖
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年度总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -641,7 +585,15 @@ clone项目,安装依赖
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
+                <a href="javascript:void(0)" class="js-tag color5">年度总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,11 +609,11 @@ clone项目,安装依赖
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,15 +633,7 @@ clone项目,安装依赖
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Mint Ui</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,7 +641,31 @@ clone项目,安装依赖
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Mint Ui</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,19 +685,15 @@ clone项目,安装依赖
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">移动端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目环境</a>
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
+                <a href="javascript:void(0)" class="js-tag color5">项目环境</a>
               </li>
              
               <li class="article-tag-list-item">
