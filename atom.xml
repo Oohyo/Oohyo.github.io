@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="oohyo.github.io/"/>
-  <updated>2018-04-03T13:38:57.168Z</updated>
+  <updated>2018-04-18T09:31:16.944Z</updated>
   <id>oohyo.github.io/</id>
   
   <author>
@@ -21,22 +21,22 @@
     <link href="oohyo.github.io/2018/03/31/%E7%8E%AF%E5%A2%83%E7%88%86%E7%82%B8/"/>
     <id>oohyo.github.io/2018/03/31/环境爆炸/</id>
     <published>2018-03-30T23:59:59.000Z</published>
-    <updated>2018-04-03T13:38:57.168Z</updated>
+    <updated>2018-04-18T09:31:16.944Z</updated>
     
-    <content type="html"><![CDATA[<p>环境爆炸了,原因疑似npm install哪个依赖包出了问题,导致webpack resolve alias不生效了,报错信息如下<br><img src="https://t1.aixinxi.net/o_1c9tj2ri4ib0qve1d1qnhrlh6a.png-j.jpg" alt="bug"><br>后续:去掉了package.json里的一些无关紧要依赖,将包版本号前面的^去掉了(因为他会去自动下载当前大版本最新的),然后项目缺少的依赖单独安装.<br>解决~<br><a id="more"></a></p>]]></content>
+    <content type="html"><![CDATA[<p>环境爆炸了,原因疑似npm install哪个依赖包出了问题,导致webpack resolve alias不生效了,报错信息如下<br><img src="https://t1.aixinxi.net/o_1c9tj2ri4ib0qve1d1qnhrlh6a.png-j.jpg" alt="bug"><br>后续:去掉了package.json里的一些无关紧要依赖,将包版本号前面的^去掉了(因为他会去自动下载当前大版本最新的),然后项目缺少的依赖单独安装.<br>tips:看一下有没有少装vue-loader<br><a id="more"></a></p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;环境爆炸了,原因疑似npm install哪个依赖包出了问题,导致webpack resolve alias不生效了,报错信息如下&lt;br&gt;&lt;img src=&quot;https://t1.aixinxi.net/o_1c9tj2ri4ib0qve1d1qnhrlh6a.png-j.jpg&quot; alt=&quot;bug&quot;&gt;&lt;br&gt;后续:去掉了package.json里的一些无关紧要依赖,将包版本号前面的^去掉了(因为他会去自动下载当前大版本最新的),然后项目缺少的依赖单独安装.&lt;br&gt;解决~&lt;br&gt;
+      &lt;p&gt;环境爆炸了,原因疑似npm install哪个依赖包出了问题,导致webpack resolve alias不生效了,报错信息如下&lt;br&gt;&lt;img src=&quot;https://t1.aixinxi.net/o_1c9tj2ri4ib0qve1d1qnhrlh6a.png-j.jpg&quot; alt=&quot;bug&quot;&gt;&lt;br&gt;后续:去掉了package.json里的一些无关紧要依赖,将包版本号前面的^去掉了(因为他会去自动下载当前大版本最新的),然后项目缺少的依赖单独安装.&lt;br&gt;tips:看一下有没有少装vue-loader&lt;br&gt;
     
     </summary>
     
       <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
-    
       <category term="小程序" scheme="oohyo.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
     
       <category term="项目环境" scheme="oohyo.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/"/>
     
@@ -252,32 +252,6 @@
       <category term="css3" scheme="oohyo.github.io/tags/css3/"/>
     
       <category term="动画" scheme="oohyo.github.io/tags/%E5%8A%A8%E7%94%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2017年度总结</title>
-    <link href="oohyo.github.io/2018/01/01/2017%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    <id>oohyo.github.io/2018/01/01/2017年度总结/</id>
-    <published>2017-12-31T23:59:00.000Z</published>
-    <updated>2018-03-05T01:16:51.221Z</updated>
-    
-    <content type="html"><![CDATA[<p>不知不觉2017就过完了，大概回顾一下吧：</p><p>年前<strong>一月</strong>份还在学校里面消磨着最后的学校时光，虽然周围人是越来越少了但好歹还是有一些的，大体活动也就是吃饭、开黑、跑步、跑得快了。那会年底工作并不是很好找，好歹运气还行，面试了一个算是拿到offer了。</p><p><strong>二月</strong>份中便入职了，先是当了MT(你好，我叫MT…)这期间认识了很多小伙伴，妈耶还第一次穿了西装皮鞋，想想也算是洗脑一波。</p><p>然后<strong>三月份</strong>就进入到了轨道，开始了正式的工作以及学习。刚开始对于模块化开发、requirejs、单例模式、MVC/MVVM框架都挺陌生，但后来接触熟悉之后发现也就这样，不过倒是发现前端的分支是真的多，以后还有很长的路要走…</p><p>到了<strong>六七月</strong>份忙着毕业设计和答辩，原以为还得认真准备的还特地请了半个月的假，结果也就是走了个过场，不过总算是顺利毕业。毕业之后便和佛在西门租了个两室一厅过起了潇洒的日子，刚开始不觉得，现在想想还是有点想念那时候。翻了下相册，七月还和同事一起去了趟娄底湄江旅游，山水非常nice；<br><img src="https://t1.aixinxi.net/o_1c4dp9kvqgekpe12vcu3j1dn3a.jpg-w.jpg" alt="湄江"><br><a id="more"></a><br>七月在同事的氛围和自己的想法下，和佛商量一起去领了皮皮(3个月三花小母猫)。<br><img src="https://t1.aixinxi.net/o_1c4dp7ln21pkc1nn71m30123q15vua.png-w.jpg" alt="皮皮3个月"><img src="https://t1.aixinxi.net/o_1c4dpa1co1d79hmou6aifqv35a.png-w.jpg" alt="皮皮8个月"><br>再后来<strong>十月</strong>佛走了，去了深圳，而我也就开始了群居生活。其中一些枝末细节已经记不得了，只知道他们真的和皮皮生活在一起的时候才觉得它是个累赘，开始我并不觉得，到现在我也依然不觉得，虽然它确实很调皮，但只觉得有点费钱罢了，这并不怪它，怪只怪我挣得确实不多。</p><p>再到现在<strong>十二月</strong>过完，回头想想一幕幕放佛还是昨天，一路过来也没什么计划，这一年看了很多博客才知道许多人年初都会有大体计划然后再细化到每个季度每个月，这些东西就算是朋友也未必会和你说，但他们写在博客里大多都只是为了给自己一个记录吧，就像我也是一样。</p><p>接着再分类总结一下，规划规划明年吧。</p><p>技术方面玩熟vue/webpack，熟悉node express/docker<br>书籍完整的看完5本<br>生活方面去旅游一次吧 女朋友什么的随缘吧<br>控制体重，瘦个十斤应该不难(●ˇ∀ˇ●) </p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;不知不觉2017就过完了，大概回顾一下吧：&lt;/p&gt;
-&lt;p&gt;年前&lt;strong&gt;一月&lt;/strong&gt;份还在学校里面消磨着最后的学校时光，虽然周围人是越来越少了但好歹还是有一些的，大体活动也就是吃饭、开黑、跑步、跑得快了。那会年底工作并不是很好找，好歹运气还行，面试了一个算是拿到offer了。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;二月&lt;/strong&gt;份中便入职了，先是当了MT(你好，我叫MT…)这期间认识了很多小伙伴，妈耶还第一次穿了西装皮鞋，想想也算是洗脑一波。&lt;/p&gt;
-&lt;p&gt;然后&lt;strong&gt;三月份&lt;/strong&gt;就进入到了轨道，开始了正式的工作以及学习。刚开始对于模块化开发、requirejs、单例模式、MVC/MVVM框架都挺陌生，但后来接触熟悉之后发现也就这样，不过倒是发现前端的分支是真的多，以后还有很长的路要走…&lt;/p&gt;
-&lt;p&gt;到了&lt;strong&gt;六七月&lt;/strong&gt;份忙着毕业设计和答辩，原以为还得认真准备的还特地请了半个月的假，结果也就是走了个过场，不过总算是顺利毕业。毕业之后便和佛在西门租了个两室一厅过起了潇洒的日子，刚开始不觉得，现在想想还是有点想念那时候。翻了下相册，七月还和同事一起去了趟娄底湄江旅游，山水非常nice；&lt;br&gt;&lt;img src=&quot;https://t1.aixinxi.net/o_1c4dp9kvqgekpe12vcu3j1dn3a.jpg-w.jpg&quot; alt=&quot;湄江&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="随笔" scheme="oohyo.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-      <category term="年度总结" scheme="oohyo.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -593,9 +567,9 @@
       <category term="WebPack" scheme="oohyo.github.io/categories/WebPack/"/>
     
     
-      <category term="js" scheme="oohyo.github.io/tags/js/"/>
-    
       <category term="WebPack" scheme="oohyo.github.io/tags/WebPack/"/>
+    
+      <category term="js" scheme="oohyo.github.io/tags/js/"/>
     
   </entry>
   
@@ -623,6 +597,33 @@
       <category term="js" scheme="oohyo.github.io/tags/js/"/>
     
       <category term="template" scheme="oohyo.github.io/tags/template/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习笔记</title>
+    <link href="oohyo.github.io/2017/03/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>oohyo.github.io/2017/03/30/学习笔记/</id>
+    <published>2017-03-29T16:42:00.000Z</published>
+    <updated>2017-12-11T10:14:48.654Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="SSI-服务器端包含"><a href="#SSI-服务器端包含" class="headerlink" title="SSI 服务器端包含"></a>SSI 服务器端包含</h3><h4 id="SSI指令基本格式"><a href="#SSI指令基本格式" class="headerlink" title="SSI指令基本格式"></a>SSI指令基本格式</h4><p>程序代码：<!-- 指令名称="指令参数">如程序代码：\<!--#include file="info.htm"--><br><strong>说明：</strong><br>1．\<!-- -->；是HTML语法中表示注释，当WEB服务器不支持SSI时，会忽略这些信息。　　<br>2．#include 为SSI指令之一。　　<br>3．file 为include的参数，info.htm为参数值，在本指令中指将要包含的文档名。　　<br><strong>注意：</strong><br>1．\&lt;!–与#号间无空格，只有SSI指令与参数间存在空格。　　<br>2．上面的标点=””，一个也不能少。　　<br>3．SSI指令是大小写敏感的，因此参数必须是小写才会起作用。<br><a id="more"></a></p><h4 id="include指令详解"><a href="#include指令详解" class="headerlink" title="include指令详解"></a>include指令详解</h4><ul><li>Virtual：给出到服务器端某个文档的虚拟路径。(相对于网站根目录的路径）</li><li>File：给出当前目录的相对路径其中不能使用”../“，也不能使用绝对路径。(相对于服务器根目录的路径） </li></ul><h4 id="SSI的include对SEO有没有影响？"><a href="#SSI的include对SEO有没有影响？" class="headerlink" title="SSI的include对SEO有没有影响？"></a>SSI的include对SEO有没有影响？</h4><ul><li>除了服务器需要多做一些工作外，通过include和直接写在页面上对外提供的页面内容是相同的，也就不会影响SEO.</li><li>但是不能把头部一些内容比如titile,keywords与description也公用,这样对搜索引擎十分不友好</li><li>参考链接:<a href="http://www.alixixi.com/program/a/2008070720488.shtml" target="_blank" rel="external">使用include对搜索引擎收录是否有影响?</a> </li></ul><h3 id="联调-接口"><a href="#联调-接口" class="headerlink" title="联调-接口"></a>联调-接口</h3><p>接口文档是根据RAP生成的,根据接口文档上的url和字段就可以写ajax请求了<br><strong>大致格式:</strong><br>接口说明: 描述<br>url:XX/XX/XX<br>入参:字段名-字段说明<br>出参:字段名-字段说明 </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;SSI-服务器端包含&quot;&gt;&lt;a href=&quot;#SSI-服务器端包含&quot; class=&quot;headerlink&quot; title=&quot;SSI 服务器端包含&quot;&gt;&lt;/a&gt;SSI 服务器端包含&lt;/h3&gt;&lt;h4 id=&quot;SSI指令基本格式&quot;&gt;&lt;a href=&quot;#SSI指令基本格式&quot; class=&quot;headerlink&quot; title=&quot;SSI指令基本格式&quot;&gt;&lt;/a&gt;SSI指令基本格式&lt;/h4&gt;&lt;p&gt;程序代码：&lt;!-- 指令名称=&quot;指令参数&quot;&gt;
+如程序代码：\&lt;!--#include file=&quot;info.htm&quot;--&gt;&lt;br&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;br&gt;1．\&lt;!-- --&gt;；是HTML语法中表示注释，当WEB服务器不支持SSI时，会忽略这些信息。　　&lt;br&gt;2．#include 为SSI指令之一。　　&lt;br&gt;3．file 为include的参数，info.htm为参数值，在本指令中指将要包含的文档名。　　&lt;br&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;br&gt;1．\&amp;lt;!–与#号间无空格，只有SSI指令与参数间存在空格。　　&lt;br&gt;2．上面的标点=””，一个也不能少。　　&lt;br&gt;3．SSI指令是大小写敏感的，因此参数必须是小写才会起作用。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="实习日记" scheme="oohyo.github.io/categories/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="css" scheme="oohyo.github.io/tags/css/"/>
+    
+      <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="移动端" scheme="oohyo.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
     
   </entry>
   
