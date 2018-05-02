@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="oohyo.github.io/"/>
-  <updated>2018-05-02T03:46:19.078Z</updated>
+  <updated>2018-05-02T03:53:15.708Z</updated>
   <id>oohyo.github.io/</id>
   
   <author>
@@ -21,16 +21,17 @@
     <link href="oohyo.github.io/2018/05/01/vue%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     <id>oohyo.github.io/2018/05/01/vue学习记录/</id>
     <published>2018-05-01T00:00:00.000Z</published>
-    <updated>2018-05-02T03:46:19.078Z</updated>
+    <updated>2018-05-02T03:53:15.708Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>之前h5移动端项目有一个顶部tab栏的组件,那个是基于jq的各种操作dom,现在项目用vue重构,所以便想用vue重构下这个组件.<br>demo和源码在下方附录里有链接,使用方法可以看源码里的readme.</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li>先理清需求,把需要自定义配置的参数列出来(tab栏数量,tab栏文字,active颜色,tab栏点击事件..)</li><li>在App.vue里将需要的参数传入组件,在组件内用数据渲染成需要的结构</li><li>最后再完善样式 </li></ol><h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ol><li><p>关于npm发布,需要先将项目打包到lib,并且配置好package.json</p><pre><code>&quot;private&quot;: false,&quot;main&quot;: &quot;lib/index.js&quot;</code></pre></li><li><p>如果你切换过npm源,发布的时候需要在npm login前切换回来.</p></li><li><p>在你决定正式发布之前应该在本地写demo测试几遍</p></li></ol><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><a href="http://ofj8a2i7u.bkt.clouddn.com/image/demo.gif" target="_blank" rel="external">Demo</a><br><a href="https://github.com/er567/mm-vue-tab" target="_blank" rel="external">源码</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>之前h5移动端项目有一个顶部tab栏的组件,那个是基于jq的各种操作dom,现在项目用vue重构,所以便想用vue重构下这个组件.</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li>先理清需求,把需要自定义配置的参数列出来(tab栏数量,tab栏文字,active颜色,tab栏点击事件..)</li><li>在App.vue里将需要的参数传入组件,在组件内用数据渲染成需要的结构</li><li>最后再完善样式 <a id="more"></a><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2></li></ol><ul><li><p>安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install mm-vue-tab</div></pre></td></tr></table></figure></li><li><p>引用</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> Tab <span class="keyword">from</span> <span class="string">'mm-vue-tab'</span></div><div class="line">Vue.use(Tab);</div></pre></td></tr></table></figure></li><li><p>使用demo</p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mm-vue-tab</span> <span class="attr">:options</span>=<span class="string">"option"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">slot</span>=<span class="string">"bd-1"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">slot</span>=<span class="string">"bd-2"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mm-vue-tab</span>&gt;</span></div></pre></td></tr></table></figure></li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">option:&#123;</div><div class="line">    <span class="attr">name</span>: [<span class="string">'导航一'</span>,<span class="string">'导航二'</span>],   <span class="comment">//导航名称</span></div><div class="line">    lineColor: <span class="string">''</span>,              <span class="comment">//默认 #f95d5b</span></div><div class="line">    slotName: [<span class="string">'bd-0'</span>,<span class="string">'bd-1'</span>],  <span class="comment">//插槽名称</span></div><div class="line">    tabClick:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;        <span class="comment">//触发导航</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'click tab'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ol><li><p>关于npm发布,需要先将项目打包到lib,并且配置好package.json</p><p> “private”: false, //设置为开源<br> “main”: “lib/index.js” //打包路径</p></li><li><p>如果你切换过npm源,发布的时候需要在npm login前切换回来.</p></li><li><p>在你决定正式发布之前应该在本地写demo测试几遍</p></li></ol><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><a href="http://ofj8a2i7u.bkt.clouddn.com/image/demo.gif" target="_blank" rel="external">Demo</a><br><a href="https://github.com/er567/mm-vue-tab" target="_blank" rel="external">源码</a></p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;之前h5移动端项目有一个顶部tab栏的组件,那个是基于jq的各种操作dom,现在项目用vue重构,所以便想用vue重构下这个组件.&lt;br&gt;d
-      
+      &lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;之前h5移动端项目有一个顶部tab栏的组件,那个是基于jq的各种操作dom,现在项目用vue重构,所以便想用vue重构下这个组件.&lt;/p&gt;
+&lt;h2 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;先理清需求,把需要自定义配置的参数列出来(tab栏数量,tab栏文字,active颜色,tab栏点击事件..)&lt;/li&gt;
+&lt;li&gt;在App.vue里将需要的参数传入组件,在组件内用数据渲染成需要的结构&lt;/li&gt;
+&lt;li&gt;最后再完善样式
     
     </summary>
     
