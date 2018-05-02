@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="oohyo.github.io/"/>
-  <updated>2018-04-18T09:31:16.944Z</updated>
+  <updated>2018-05-02T03:40:36.930Z</updated>
   <id>oohyo.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一个简易多栏tab组件,以及npm发布</title>
+    <link href="oohyo.github.io/2018/05/01/vue%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <id>oohyo.github.io/2018/05/01/vue学习记录/</id>
+    <published>2018-05-01T00:00:00.000Z</published>
+    <updated>2018-05-02T03:40:36.930Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>之前h5移动端项目有一个顶部tab栏的组件,那个是基于jq的各种操作dom,现在项目用vue重构,所以便想用vue重构下这个组件.</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li>先理清需求,把需要自定义配置的参数列出来(tab栏数量,tab栏文字,active颜色,tab栏点击事件..)</li><li>在App.vue里将需要的参数传入组件,在组件内用数据渲染成需要的结构</li><li>最后再完善样式 </li></ol><h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><ol><li><p>关于npm发布,需要先将项目打包到lib,并且配置好package.json</p><pre><code>&quot;private&quot;: false,&quot;main&quot;: &quot;lib/index.js&quot;</code></pre></li><li><p>如果你切换过npm源,发布的时候需要在npm login前切换回来.</p></li><li><p>在你决定正式发布之前应该在本地写demo测试几遍</p></li></ol><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><a href="http://ofj8a2i7u.bkt.clouddn.com/image/demo.gif" target="_blank" rel="external">Demo</a><br><a href="https://github.com/er567/mm-vue-tab" target="_blank" rel="external">源码</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;之前h5移动端项目有一个顶部tab栏的组件,那个是基于jq的各种操作dom,现在项目用vue重构,所以便想用vue重构下这个组件.&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
+    
+      <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="npm" scheme="oohyo.github.io/tags/npm/"/>
+    
+  </entry>
   
   <entry>
     <title>黑色星期五-环境爆炸</title>
@@ -34,9 +64,9 @@
       <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="小程序" scheme="oohyo.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
-    
       <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
+    
+      <category term="小程序" scheme="oohyo.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
     
       <category term="项目环境" scheme="oohyo.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83/"/>
     
@@ -135,39 +165,6 @@
       <category term="yilia" scheme="oohyo.github.io/tags/yilia/"/>
     
       <category term="hexo主题" scheme="oohyo.github.io/tags/hexo%E4%B8%BB%E9%A2%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vue学习记录</title>
-    <link href="oohyo.github.io/2018/02/15/vue%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    <id>oohyo.github.io/2018/02/15/vue学习记录/</id>
-    <published>2018-02-15T12:13:14.000Z</published>
-    <updated>2018-03-03T03:01:00.128Z</updated>
-    
-    <content type="html"><![CDATA[<p>没有先后顺序，想到什么就写什么吧。</p><h4 id="npm-start的时候正常有样式但npm-run-build之后没有样式"><a href="#npm-start的时候正常有样式但npm-run-build之后没有样式" class="headerlink" title="npm start的时候正常有样式但npm run build之后没有样式"></a>npm start的时候正常有样式但npm run build之后没有样式</h4><blockquote><p>原因：样式被覆盖了<br>解决：main.js里将router在引入ui组件之前引入或者组件样式加scoped<br>注意组件嵌套的层级合理布局，最好每个分组组件的样式都独立，公用样式抽离</p></blockquote><h4 id="跳转同一路由不同参数，页面不会刷新"><a href="#跳转同一路由不同参数，页面不会刷新" class="headerlink" title="跳转同一路由不同参数，页面不会刷新"></a>跳转同一路由不同参数，页面不会刷新</h4><blockquote><p>原因：组件复用，没有重新加载组件<br>解决：监听路由的变化执行数据变化的时候请求数据的方法，页面初始化的时候也调用一次</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">mounted() &#123;</div><div class="line">    <span class="keyword">this</span>.author = <span class="keyword">this</span>.$store.state.demo.author;</div><div class="line">    <span class="keyword">this</span>.getTheme(<span class="string">`/<span class="subst">$&#123;<span class="keyword">this</span>.$route.params.id&#125;</span>`</span>);</div><div class="line">&#125;,</div><div class="line"><span class="attr">methods</span>: &#123;</div><div class="line">    getTheme(id) &#123;</div><div class="line">        <span class="keyword">this</span>.$ajax.get(url + id).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">            <span class="comment">//传参或者拼接url 视接口而定</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;,</div><div class="line">beforeRouteUpdate(to, <span class="keyword">from</span>, next) &#123;</div><div class="line">    <span class="keyword">this</span>.getTheme(<span class="string">`/<span class="subst">$&#123;to.params.id&#125;</span>`</span>);</div><div class="line">    next();</div><div class="line">&#125;</div></pre></td></tr></table></figure><a id="more"></a><h4 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h4><p><strong>1. prop</strong><br>添加<a href="https://cn.vuejs.org/v2/guide/components.html#sync-修饰符" target="_blank" rel="external">sync修饰符</a>，可以实现子组件修改父组件的值，形成‘双向绑定’<br>注意：vue版本需2.3.0及以上<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//父组件 引用sidebar，将showSidebar传给子组件</span></div><div class="line">&lt;sidebar :showSidebar.sync=<span class="string">"showSidebar"</span>&gt;&lt;/sidebar&gt;</div><div class="line"><span class="comment">//子组件 将改变后的sidebarShow传给父组件</span></div><div class="line"><span class="keyword">this</span>.$emit(<span class="string">"update:showSidebar"</span>, <span class="keyword">this</span>.sidebarShow);</div></pre></td></tr></table></figure></p><p><strong>2. $on监听$emit触发</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vm.$on(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(msg)</div><div class="line">&#125;)</div><div class="line">vm.$emit(<span class="string">'test'</span>, <span class="string">'hi'</span>)</div><div class="line"><span class="comment">// =&gt; "hi"</span></div></pre></td></tr></table></figure></p><p><strong>3. var bus = new Vue()</strong><br>将事件的绑定和监听都在bus上进行，组件之间可以随意通信。</p><h4 id="自定义指令directives（钩子函数及参数）详见官网"><a href="#自定义指令directives（钩子函数及参数）详见官网" class="headerlink" title="自定义指令directives（钩子函数及参数）详见官网"></a>自定义指令directives（钩子函数及参数）详见官网</h4><p><a href="https://cn.vuejs.org/v2/guide/custom-directive.html#钩子函数" target="_blank" rel="external">钩子函数</a>：bind/inserted/updata/componentUpdated/unbind</p><p><a href="https://cn.vuejs.org/v2/guide/custom-directive.html#钩子函数参数" target="_blank" rel="external">钩子函数参数</a>：el/binding(传参对象)/vnode/oldVnode</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;没有先后顺序，想到什么就写什么吧。&lt;/p&gt;
-&lt;h4 id=&quot;npm-start的时候正常有样式但npm-run-build之后没有样式&quot;&gt;&lt;a href=&quot;#npm-start的时候正常有样式但npm-run-build之后没有样式&quot; class=&quot;headerlink&quot; title=&quot;npm start的时候正常有样式但npm run build之后没有样式&quot;&gt;&lt;/a&gt;npm start的时候正常有样式但npm run build之后没有样式&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;原因：样式被覆盖了&lt;br&gt;解决：main.js里将router在引入ui组件之前引入或者组件样式加scoped&lt;br&gt;注意组件嵌套的层级合理布局，最好每个分组组件的样式都独立，公用样式抽离&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&quot;跳转同一路由不同参数，页面不会刷新&quot;&gt;&lt;a href=&quot;#跳转同一路由不同参数，页面不会刷新&quot; class=&quot;headerlink&quot; title=&quot;跳转同一路由不同参数，页面不会刷新&quot;&gt;&lt;/a&gt;跳转同一路由不同参数，页面不会刷新&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;原因：组件复用，没有重新加载组件&lt;br&gt;解决：监听路由的变化执行数据变化的时候请求数据的方法，页面初始化的时候也调用一次&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;mounted() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.author = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.$store.state.demo.author;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.getTheme(&lt;span class=&quot;string&quot;&gt;`/&lt;span class=&quot;subst&quot;&gt;$&amp;#123;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.$route.params.id&amp;#125;&lt;/span&gt;`&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;methods&lt;/span&gt;: &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    getTheme(id) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.$ajax.get(url + id).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;res&lt;/span&gt; =&amp;gt;&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;//传参或者拼接url 视接口而定&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;beforeRouteUpdate(to, &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt;, next) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.getTheme(&lt;span class=&quot;string&quot;&gt;`/&lt;span class=&quot;subst&quot;&gt;$&amp;#123;to.params.id&amp;#125;&lt;/span&gt;`&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    next();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="oohyo.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="vue" scheme="oohyo.github.io/tags/vue/"/>
-    
-      <category term="js" scheme="oohyo.github.io/tags/js/"/>
-    
-      <category term="Mint Ui" scheme="oohyo.github.io/tags/Mint-Ui/"/>
     
   </entry>
   
@@ -567,9 +564,9 @@
       <category term="WebPack" scheme="oohyo.github.io/categories/WebPack/"/>
     
     
-      <category term="WebPack" scheme="oohyo.github.io/tags/WebPack/"/>
-    
       <category term="js" scheme="oohyo.github.io/tags/js/"/>
+    
+      <category term="WebPack" scheme="oohyo.github.io/tags/WebPack/"/>
     
   </entry>
   
