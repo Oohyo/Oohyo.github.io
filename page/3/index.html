@@ -9,16 +9,16 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <title>静夜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="er567，2017届毕业生，目前在长沙从事前端开发工作，也是一枚多肉爱好者，有一只皮皮。网易云ID:er_567">
+  <meta name="description" content="er567，2017届毕业生，目前在深圳从事前端开发工作，曾是一枚多肉爱好者，有一只皮皮(三花橘)和一只叼毛(蓝白英短)。网易云ID:er_567">
 <meta property="og:type" content="website">
 <meta property="og:title" content="静夜">
 <meta property="og:url" content="oohyo.github.io/page/3/index.html">
 <meta property="og:site_name" content="静夜">
-<meta property="og:description" content="er567，2017届毕业生，目前在长沙从事前端开发工作，也是一枚多肉爱好者，有一只皮皮。网易云ID:er_567">
+<meta property="og:description" content="er567，2017届毕业生，目前在深圳从事前端开发工作，曾是一枚多肉爱好者，有一只皮皮(三花橘)和一只叼毛(蓝白英短)。网易云ID:er_567">
 <meta property="og:locale" content="Chinese">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="静夜">
-<meta name="twitter:description" content="er567，2017届毕业生，目前在长沙从事前端开发工作，也是一枚多肉爱好者，有一只皮皮。网易云ID:er_567">
+<meta name="twitter:description" content="er567，2017届毕业生，目前在深圳从事前端开发工作，曾是一枚多肉爱好者，有一只皮皮(三花橘)和一只叼毛(蓝白英短)。网易云ID:er_567">
   
   
     <link rel="icon" href="/favicon.png">
@@ -179,6 +179,94 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-nginx-https" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/12/nginx-https/">window nginx配置https相关问题</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/12/nginx-https/" class="archive-article-date">
+  	<time datetime="2017-12-11T18:00:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>[emerg] BIO_new_file(“/usr/local/nginx/conf/cert/214291778530222.pem”) failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen(‘/usr/local/nginx/conf/cert/214291778530222.pem’,’r’) error:2006D080:BIO routines:BIO_new_file:no such file) failed. </li>
+</ol>
+<p>=&gt;原因未知，将证书和key的路径改成相对路径就可以了</p>
+<ol start="2">
+<li>[emerg] shared zone “SSL” has no equal addresses: 02CC0000 vs 02CB0000</li>
+</ol>
+<p>=&gt;错误原因：ssl_protocols SSLv2 SSLv3 TLSv1 应该是协议配置的问题<br>=&gt;解决办法：ssl_protocols  SSLv3 TLSv1 TLSv1.1 TLSv1.2;</p>
+<ol start="3">
+<li>如果是include vhost里的配置，则vhost里的conf配置也要加上listen 443;</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">nginx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/学习笔记/" class="article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/12/nginx-https/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-VScode终端乱码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -529,129 +617,6 @@
 
 
   
-    <article id="post-css4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/css4/">css4新特性</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/css4/" class="archive-article-date">
-  	<time datetime="2017-08-23T13:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><a href="http://css4-selectors.com/selector/css4/negation-pseudo-class/" target="_blank" rel="noopener">:not</a> </li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:not(s1, s2, ...) &#123;&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在css3中仅能匹配一个选择器,css4中可以匹配多个;</p>
-</blockquote>
-<blockquote>
-<p>:not([data-xxx=”xx”],[data-xxx=”xxx”]);</p>
-</blockquote>
-<blockquote>
-<p>可以用:not()来提高优先级 e.g .negation:not(p){ color:blue; }  .negation { color: black; }</p>
-</blockquote>
-<blockquote>
-<p>仅支持safari</p>
-</blockquote>
-<ol start="2">
-<li><a href="http://css4-selectors.com/selector/css4/matches-any-pseudo-class/" target="_blank" rel="noopener">:matches</a> </li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:matches(s1, s2) &#123;&#125;</span><br><span class="line">E:-webkit-any(s1, s2, ...) &#123;&#125;</span><br><span class="line">E:-moz-any(s1, s2, ...) &#123;&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>意义与:not()相反,匹配对应选择器,简化重复的规则</p>
-</blockquote>
-<blockquote>
-<p>:matches(span, div) :matches(span, div) {}</p>
-</blockquote>
-<blockquote>
-<p>支持大部分主流浏览器,不支持ie和Edge(win10内置浏览器)</p>
-</blockquote>
-<ol start="3">
-<li><a href="http://css4-selectors.com/selector/css4/relational-pseudo-class/" target="_blank" rel="noopener">:has</a> </li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:has(rs1, rs2, ...)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>包含伪类选择器,匹配选择器</p>
-</blockquote>
-<blockquote>
-<p>暂时没有浏览器支持</p>
-</blockquote>
-        
-          <!-- 注释掉文章列表尾部的more -->
-          <!-- <a class="article-more-a" href="/2017/08/23/css4/#more">more >></a> -->
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">兼容性</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/学习笔记/" class="article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/css4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -824,14 +789,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -844,15 +801,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -868,11 +829,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
+                <a href="javascript:void(0)" class="js-tag color4">兼容性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -889,6 +846,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">hexo主题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -936,15 +901,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目环境</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">css3</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">动画</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目环境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1008,19 +973,15 @@
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="https://er567.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>蛮蛮来</a>
+              <a href="https://er567.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>静夜</a>
             </li>
           
             <li class="search-li">
-              <a href="http://nicejuzi.top/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>柠檬味の青春</a>
+              <a href="https://er567.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>蛮蛮来</a>
             </li>
           
             <li class="search-li">
               <a href="https://blog.ihoey.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>梦魇小栈</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://jingye.me./" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>静夜(myTypechoBlog)</a>
             </li>
           
         </ul>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="oohyo.github.io/"/>
-  <updated>2018-07-21T15:19:55.601Z</updated>
+  <updated>2019-04-05T18:20:49.530Z</updated>
   <id>oohyo.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>换地方更新</title>
+    <link href="oohyo.github.io/2019/04/06/%E6%9B%B4%E6%96%B0%E8%AF%B4%E6%98%8E/"/>
+    <id>oohyo.github.io/2019/04/06/更新说明/</id>
+    <published>2019-04-06T02:09:00.000Z</published>
+    <updated>2019-04-05T18:20:49.530Z</updated>
+    
+    <content type="html"><![CDATA[<p>这个博客是之前还在长沙的时候折腾的 挂在github里（经常加载会很慢），后面来深圳找了工作之后用自己<a href="https://er567.cn/" target="_blank" rel="noopener">er567.cn</a>这个域名和基友学生身份买的阿里云服务器基于typecho另外搭了一个，主题的话稍微找了下 无意间发现了Pinghsu还挺好看的，于是就换了过去。中间服务器还重置过一次东西都没备份…</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这个博客是之前还在长沙的时候折腾的 挂在github里（经常加载会很慢），后面来深圳找了工作之后用自己&lt;a href=&quot;https://er567.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;er567.cn&lt;/a&gt;这个域名和基友学生身份买的阿里
+      
+    
+    </summary>
+    
+      <category term="声明" scheme="oohyo.github.io/categories/%E5%A3%B0%E6%98%8E/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>面试记录</title>
@@ -638,33 +661,6 @@
       <category term="js" scheme="oohyo.github.io/tags/js/"/>
     
       <category term="WebPack" scheme="oohyo.github.io/tags/WebPack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>蜜汁四月</title>
-    <link href="oohyo.github.io/2017/04/24/%E8%9C%9C%E6%B1%81%E5%9B%9B%E6%9C%88/"/>
-    <id>oohyo.github.io/2017/04/24/蜜汁四月/</id>
-    <published>2017-04-23T22:56:33.000Z</published>
-    <updated>2018-05-19T01:37:22.733Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://om1a60efb.bkt.clouddn.com/duorou_04.jpg?imageView2/2/w/450/q/75%7Cimageslim" alt="duorou"><br>:)先秀一波新入的肉吧~ </p><h3 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h3><p>&emsp;&emsp;不知不觉四月已经快过完了，毕业设计还没开始动手，只能我先出手了…<br>学习方面还是没有走什么计划，所以这一次决定定一波计划~<br><a id="more"></a><br>1.毕业论文<br>2.PHP入门，操作数据库<br>3.模拟接口(php/nodejs)</p><h3 id="New-Knowledge"><a href="#New-Knowledge" class="headerlink" title="New Knowledge"></a>New Knowledge</h3><p><strong>chrome控制台调试方法</strong><br>1.Sources 打断点<br>2.Preserve log 保留日志<br>3.Sources - Watch 单步调试，跟踪变量的一生</p><p><strong>loading…</strong>  </p><h4 id="附参考资料："><a href="#附参考资料：" class="headerlink" title="附参考资料："></a>附参考资料：</h4><p><a href="https://segmentfault.com/a/1190000004123527" target="_blank" rel="noopener">Sources拾遗</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://om1a60efb.bkt.clouddn.com/duorou_04.jpg?imageView2/2/w/450/q/75%7Cimageslim&quot; alt=&quot;duorou&quot;&gt;&lt;br&gt;:)先秀一波新入的肉吧~ &lt;/p&gt;
-&lt;h3 id=&quot;计划&quot;&gt;&lt;a href=&quot;#计划&quot; class=&quot;headerlink&quot; title=&quot;计划&quot;&gt;&lt;/a&gt;计划&lt;/h3&gt;&lt;p&gt;&amp;emsp;&amp;emsp;不知不觉四月已经快过完了，毕业设计还没开始动手，只能我先出手了…&lt;br&gt;学习方面还是没有走什么计划，所以这一次决定定一波计划~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="实习日记" scheme="oohyo.github.io/categories/%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
-    
-    
-      <category term="css" scheme="oohyo.github.io/tags/css/"/>
-    
-      <category term="js" scheme="oohyo.github.io/tags/js/"/>
-    
-      <category term="template" scheme="oohyo.github.io/tags/template/"/>
     
   </entry>
   
